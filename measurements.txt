@@ -1,3 +1,0 @@
-teaspoon=5
-cup
-tablespoon
