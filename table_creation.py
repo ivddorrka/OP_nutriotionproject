@@ -1,5 +1,4 @@
 import json 
-import pandas as pd
 import csv
 
 f = open('small_recipe.json')
@@ -22,3 +21,5 @@ with f:
     writer = csv.writer(f)
     for row in lst_to_csv:
         writer.writerow(row)
+
+f.close()
