@@ -1,1 +1,4 @@
+*.csv
 .~lock.recipes.csv#
+PY_files/__pycache__/
+

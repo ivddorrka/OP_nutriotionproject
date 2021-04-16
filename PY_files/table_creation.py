@@ -2,7 +2,7 @@ import json
 import csv
 from recipe_analyse import result_ingredients
 
-f = open('recipes/recipes_raw_nosource_fn.json')
+f = open('recipes/recipes_raw_nosource_ar.json')
 data = json.load(f)
 random_recipe_id = data
 values = list(data.values())
@@ -37,4 +37,4 @@ with f:
         writer.writerow(row)
 
 f.close()
-print(len(lol))
+# print(len(lol))

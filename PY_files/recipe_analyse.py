@@ -4,7 +4,8 @@ To modify recipes
 
 import re
 
-# lst = ['1 (16 ounce) package Johnsonville® Italian All Natural Ground Sausage ADVERTISEMENT', '3 celery ribs, chopped ADVERTISEMENT', '1 large onion, chopped ADVERTISEMENT', '1 cup finely chopped carrots ADVERTISEMENT', '1 (12 ounce) package herb-seasoned stuffing cubes ADVERTISEMENT', '2 cups chicken broth, or more as needed ADVERTISEMENT', '2 eggs, lightly beaten ADVERTISEMENT', '1/2 cup chopped fresh parsley ADVERTISEMENT', 'ADVERTISEMENT']
+# lst = ['1 1/2 tablespoon sugar', '2 3/4 pounds water', '1 cup keks']
+
 def get_grams_of_product(lst): 
     """Having a list of ingredients finding one by one measurements"""
     result = []
@@ -25,13 +26,20 @@ def get_grams_of_product(lst):
                     grams = f'{round(28.35 * float(num), 3)} g'
             else:
                 num = splitted[0]
-                if '/' in list(num):
-                    first = float(num.split('/')[0])
-                    second = float(num.split('/')[1])
+                if len(splitted[1].split('/'))  == 2:
+                    
+                    first = float(splitted[1].split('/')[0])
+                    second = float(splitted[1].split('/')[1])
                     res = first/second
-                    grams = f'{round(28.35 * res, 3)} g'
+                    grams = f'{round(28.35 * res * float(num), 3)} g'
                 else:
-                    grams = f'{round(28.35 * float(num), 3)} g'
+                    if len(num.split('/')) == 2:
+                        first = float(num.split('/')[0])
+                        second = float(num.split('/')[1])
+                        res = first/second
+                        grams = f'{round(28.35 * res, 3)} g'
+                    else:
+                        grams = f'{round(28.35 * float(num), 3)} g'
             
         elif 'pound)' in splitted[:3] or 'pounds)' in splitted[:3]:
             num = splitted[1][1:]
@@ -44,13 +52,19 @@ def get_grams_of_product(lst):
                 grams = f'{round(453.592 * float(num), 3)} g'
         elif 'pound' in splitted[:3] or 'pounds' in splitted[:3]:
             num = splitted[0]
-            if '/' in list(num):
-                first = float(num.split('/')[0])
-                second = float(num.split('/')[1])
+            if len(splitted[1].split('/')) == 2:
+                first = float(splitted[1].split('/')[0])
+                second = float(splitted[1].split('/')[1])
                 res = first/second
-                grams = f'{round(453.592 * res, 3)} g'
+                grams = f'{round(453.592 * res * float(num), 3)} g'
             else:
-                grams = f'{round(453.592 * float(num), 3)} g'
+                if '/' in list(num):
+                    first = float(num.split('/')[0])
+                    second = float(num.split('/')[1])
+                    res = first/second
+                    grams = f'{round(453.592 * res, 3)} g'
+                else:
+                    grams = f'{round(453.592 * float(num), 3)} g'
         elif 'inch)' in splitted[:3]:
             num = splitted[1][1:]
             if '/' in list(num):
@@ -70,42 +84,64 @@ def get_grams_of_product(lst):
 
         elif 'tablespoon' in splitted or 'tablespoons' in splitted:
             number = splitted[0]
-            if '/' in list(number):
-                first = float(number.split('/')[0])
-                second = float(number.split('/')[1])
-                grams = f'{round((first/second) * 17.07,3)} g' # one tablespoon has 17.07 grams
+            if len(splitted[1].split('/')) == 2:
+                first = float(splitted[1].split('/')[0])
+                second = float(splitted[1].split('/')[1])
+                grams = f'{round((first/second) * 17.07 * float(number), 3)} g'
             else:
-                grams = f'{round(float(number) * 17.07, 3)} g'
-
-        elif 'teaspoon' in splitted or 'teaspoons' in splitted:
-            number = splitted[0]
-            if '/' in list(number):
-                first = float(number.split('/')[0])
-                second = float(number.split('/')[1])
-                res = first/second
-                grams = f'{round(res * 5.69, 3)} g' # one teaspoon has 5.69 grams
-            else:
-                grams = f'{round(float(number) * 5.69, 3)} g'
+                if '/' in list(number):
+                    first = float(number.split('/')[0])
+                    second = float(number.split('/')[1])
+                    grams = f'{round((first/second) * 17.07,3)} g' # one tablespoon has 17.07 grams
+                else:
+                    grams = f'{round(float(number) * 17.07, 3)} g'
         
+        elif 'teaspoon' in splitted or 'teaspoons' in splitted:
+
+            number = splitted[0]
+            if len(splitted[1].split('/')) == 2:
+                first = float(splitted[1].split('/')[0])
+                second = float(splitted[1].split('/')[1])
+                grams = f'{round((first/second) * 5.69 * float(number), 3)} g'
+            else:
+                if '/' in list(number):
+                    first = float(number.split('/')[0])
+                    second = float(number.split('/')[1])
+                    grams = f'{round((first/second) * 5.69,3)} g' # one teaspoon has 5.69 grams
+                else:
+                    grams = f'{round(float(number) * 5.69, 3)} g'
 
         elif 'cup' in splitted or 'cups' in splitted:
+
             number = splitted[0]
-            if '/' in list(number):
-                first = float(number.split('/')[0])
-                second = float(number.split('/')[1])
-                res = first/second
-                grams = f'{round(res * 128, 3)} g' # one cup has 128 grams
+            if len(splitted[1].split('/')) == 2:
+                first = float(splitted[1].split('/')[0])
+                second = float(splitted[1].split('/')[1])
+                grams = f'{round((first/second) * 128 * float(number), 3)} g'
             else:
-                grams = f'{round(float(number) * 128, 3)} g'
+                if '/' in list(number):
+                    first = float(number.split('/')[0])
+                    second = float(number.split('/')[1])
+                    grams = f'{round((first/second) * 128,3)} g' # one cup has 128 grams
+                else:
+                    grams = f'{round(float(number) * 128, 3)} g'
+
+
         elif 'can' in splitted or 'cans' in splitted:
+
             number = splitted[0]
-            if '/' in list(number):
-                first = float(number.split('/')[0])
-                second = float(number.split('/')[1])
-                res = first/second
-                grams = f'{round(res * 305, 3)} g' # one cup has 128 grams
+            if len(splitted[1].split('/')):
+                first = float(splitted[1].split('/')[0])
+                second = float(splitted[1].split('/')[1])
+                grams = f'{round((first/second) * 305 * float(number), 3)} g'
             else:
-                grams = f'{round(float(number) * 305, 3)} g'
+                if '/' in list(number):
+                    first = float(number.split('/')[0])
+                    second = float(number.split('/')[1])
+                    grams = f'{round((first/second) * 305,3)} g' # one cup has 128 grams
+                else:
+                    grams = f'{round(float(number) * 305, 3)} g'
+
         else:
             try:
             # if splitted[0]:
@@ -119,8 +155,8 @@ def get_grams_of_product(lst):
 
 def get_product(lst):
     """To get products from a list of ingredients one by one"""
-    list_portions = ['tablespoon', 'tablespoons', 'teaspoon', 'teaspoons', 'can', 'cans', 'cup', 'cups']
-    list_brackets = ['pounds)', 'pound)', 'inch)', 'ounce)', '']
+    list_portions = ['tablespoon', 'tablespoons', 'teaspoon', 'teaspoons', 'can', 'cans', 'cup', 'cups', 'pound', 'pounds', 'ounce', 'ounces']
+    list_brackets = ['pounds)', 'pound)', 'inch)', 'ounce)', 'sticks)', 'stick)', 'stick', 'chopped', 'more)', 'chilled', 'unsweetened', 'sliced', 'thinly', 'cup)', 'cups)', 'lb', 'beaten', '']
     result = []
     for i in lst:
         by_koma = i.split(',')
@@ -148,21 +184,22 @@ def get_product(lst):
             for j in range(len(food_pos)):
                 try:
                     if food_pos[-3] not in list_portions and food_pos[-1][-1] != ')':
+
+                        if food_pos[-1] == 'ADVERTISEMENT':
+                            food = ' '.join(food_pos[-4:-1])
+                        else:
+                            food = ' '.join(food_pos[-3:])
+                    else:
                         if food_pos[-1] == 'ADVERTISEMENT':
                             food = ' '.join(food_pos[-3:-1])
                         else:
                             food = ' '.join(food_pos[-2:])
-                    else:
-                        if food_pos[-1] == 'ADVERTISEMENT':
-                            food = ' '.join(food_pos[-2:-1])
-                        else:
-                            food = ' '.join(food_pos[-1:])
                 except IndexError:
                     if food_pos[-2] not in list_portions and food_pos[-1][-1] != ')':
                         if food_pos[-1] == 'ADVERTISEMENT':
-                            food = ' '.join(food_pos[-3:-1])
+                            food = ' '.join(food_pos[-4:-1])
                         else:
-                            food = ' '.join(food_pos[-2:])
+                            food = ' '.join(food_pos[-3:])
                     else:
                         food = ' '.join(food_pos[-1:])
 
@@ -172,16 +209,16 @@ def get_product(lst):
                         if elements in list_brackets:
                             food_pos1 = new_here[1].split()
                             if food_pos1[-2] not in list_portions and food_pos1[-1] == 'ADVERTISEMENT':
-                                food = ' '.join(food_pos1[-3:-1])
+                                food = ' '.join(food_pos1[-4:-1])
                             else:
-                                food = ' '.join(food_pos1[-2:])
+                                food = ' '.join(food_pos1[-3:])
                         else:
                             food_pos2 = new_here[0].split()
                             try:
                                 if food_pos2[-2] not in list_portions and food_pos2[-1] == 'ADVERTISEMENT':
-                                    food = ' '.join(food_pos2[-3:-1])
+                                    food = ' '.join(food_pos2[-4:-1])
                                 else:
-                                    food = ' '.join(food_pos2[-2:])
+                                    food = ' '.join(food_pos2[-3:])
                             except IndexError:
                                 food = ' '.join(food_pos2[-1])
                
@@ -215,8 +252,26 @@ def get_product(lst):
                 food_result.append(' '.join(local_list[1:-1]))         
             else:
                 food_result.append(' '.join(local_list[1:]))
-        
-    return food_result
+    size = ['small', 'large', 'medium', 'extra-large', 'medium-dry']
+    final_check = []
+    unneeded = ['of', 'and', 'or', 'with', 'such', 'as']
+    number_str = [str(i) for i in range(100)]
+
+    for x in food_result:
+        lst_here = x.split()
+        res = ''
+        for words in range(len(x.split())):
+            # res = ' '
+            if lst_here[words] not in list_portions and lst_here[words] not in unneeded and len(lst_here[words].split('/')) < 2 and lst_here[words] not in list_brackets and lst_here[words] not in size: 
+                if lst_here[words] not in number_str:
+                    if 'pound' not in lst_here[words].split('-'):
+                        if lst_here[words] not in re.findall(r'^\d+[-]$', lst_here[words]):
+                            res += f'{lst_here[words]} '
+            # final_check.append(' '.join(lst_here))
+        final_check.append(res)
+
+
+    return final_check
 # del lst[-1]
 # print(get_product(lst))
 
@@ -232,7 +287,22 @@ def result_ingredients(lst):
     for i in range(len(lst_food)):
         new_str = f'{lst_food[i]}: {lst_measurements[i]}'
         result.append(new_str)
-    return '\n'.join(result)
+    # nums = [str(i) for i in range(100)]
+    final = []
+
+    for i in range(len(result)):
+        if len(result[i].split(' : ')[0]) > 1:
+            # if result[i].split(' : ')[0][0] != '(' and result[i].split(' : ')[0][1] != ')':
+            #     if 'pound' not in result[i][1].split('-'):
+            #         if result[i][0] not in nums:
+            final.append(result[i])
+
+    return '\n'.join(final)
 
 
+
+
+# lst = ['1 1/2 pounds fresh tuna steaks, minced ADVERTISEMENT', '1/2 cup dry bread crumbs ADVERTISEMENT', '1/4 cup finely chopped green onion ADVERTISEMENT', '1/4 cup grated carrot ADVERTISEMENT', '1 tablespoon minced fresh ginger root ADVERTISEMENT', '1 tablespoon chopped fresh cilantro ADVERTISEMENT', '1 teaspoon sesame oil ADVERTISEMENT', '1 tablespoon ketchup ADVERTISEMENT', '1 tablespoon lite soy sauce ADVERTISEMENT', '1/2 teaspoon ground cumin ADVERTISEMENT', '1/4 teaspoon salt ADVERTISEMENT', '1/4 teaspoon black pepper ADVERTISEMENT', '1 egg, beaten ADVERTISEMENT', '6 hamburger buns ADVERTISEMENT', '6 lettuce leaves - rinsed and dried ADVERTISEMENT', '2 medium tomatoes, sliced ADVERTISEMENT', 'ADVERTISEMENT']
+# # lst = ['1 pound ground beef ADVERTISEMENT', '1 onion, chopped ADVERTISEMENT', '1 (16 ounce) can chili beans, with liquid ADVERTISEMENT', '1 (15 ounce) can kidney beans with liquid ADVERTISEMENT', '1 (15 ounce) can whole kernel corn, with liquid ADVERTISEMENT', '1 (8 ounce) can tomato sauce ADVERTISEMENT', '2 cups water ADVERTISEMENT', '2 (14.5 ounce) cans peeled and diced tomatoes ADVERTISEMENT', '1 (4 ounce) can diced green chile peppers ADVERTISEMENT', '1 (1.25 ounce) package taco seasoning mix ADVERTISEMENT', 'ADVERTISEMENT']
+# # lst = ['1/4 cup vegetable oil ADVERTISEMENT', '1 head cauliflower, broken into small florets ADVERTISEMENT', '2 onions, chopped ADVERTISEMENT', '1 cup chopped tomato ADVERTISEMENT', '1/4 cup chopped fresh parsley ADVERTISEMENT', '1 jalapeno pepper, chopped ADVERTISEMENT', '1 teaspoon ground cumin ADVERTISEMENT', '1/2 teaspoon ground coriander ADVERTISEMENT', '1/2 teaspoon ground turmeric ADVERTISEMENT', '1 cup chicken broth ADVERTISEMENT', '1 clove garlic, minced ADVERTISEMENT', '1/2 teaspoon salt ADVERTISEMENT', 'ADVERTISEMENT']
 # print(result_ingredients(lst))
