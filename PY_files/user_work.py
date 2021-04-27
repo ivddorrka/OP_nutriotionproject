@@ -24,6 +24,7 @@ class User:
         self.get_height(height)
         self.get_weight(weight)
         self.get_activ(act)
+        self.set_gender(gender)
     
     def set_password(self, password):
         if len(password) <8:
@@ -47,4 +48,8 @@ class User:
     def get_activ(self, act):
         """To get a number of activity"""
         self.activity = float(act.split()[0])
+
+    def set_gender(self, gender):
+        """To set a choosen gender"""
+        self.gender = gender
         
