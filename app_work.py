@@ -1,3 +1,6 @@
+"""
+Website v0
+"""
 from flask import Flask, redirect, url_for, render_template, request
 from PY_files import user_work
 
@@ -32,7 +35,6 @@ def file_html():
     """
     To return already submitted page
     """
-    # user = register()
     info = infor_user()
     password = info[1]
     user = info[0]
@@ -41,7 +43,6 @@ def file_html():
     weight = info[4]
     gender = info[5]
     act = info[6]
-    # try:
     try:
         user.set_characteristics(age, height, weight, gender, act)
         try:
@@ -51,7 +52,6 @@ def file_html():
             return render_template("failure.html") 
     except ValueError:
         return render_template("failure.html")
-    # except Passwor
     
 
 if __name__ == "__main__":

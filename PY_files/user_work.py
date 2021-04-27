@@ -42,7 +42,7 @@ class User:
 
     def get_weight(self, weight):
         """To get weight"""
-        self.weight = int(weight)
+        self.weight = float(weight)
     
     def get_activ(self, act):
         """To get a number of activity"""
