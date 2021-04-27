@@ -37,7 +37,7 @@ class User:
         
     def get_height(self, height):
         """To get height"""
-        self.height = int(height)
+        self.height = float(height)
 
 
     def get_weight(self, weight):
