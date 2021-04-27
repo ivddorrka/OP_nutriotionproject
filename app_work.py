@@ -10,24 +10,12 @@ def home():
     """
     return render_template("registration.html")
 
-# @app.route("/registration", methods=["POST"])
-# def register():
-#     """
-#     To get data from user
-#     """
-#     login = request.form.get("login")
-#     password = request.form.get("password")
-#     # redirect(url_for('questions'))
-#     return user_work.User(login, password)
-
-
 
 @app.route("/registration", methods=["POST"])
 def infor_user():
     """
     To get data from user
     """
-    # render_template("index.html")
     login = request.form.get("login")
     password = request.form.get("password")    
     age = request.form.get("age")
@@ -35,8 +23,8 @@ def infor_user():
     weight = request.form.get("weight")
     gender = request.form.get("gender")
     act = request.form.get("comp_select")
-    user = user_work.User(login, password)
-    return user, age, height, weight, gender, act
+    user = user_work.User(login)
+    return user, password, age, height, weight, gender, act
 
 
 @app.route("/registration/submitted", methods=["POST"])
@@ -46,18 +34,24 @@ def file_html():
     """
     # user = register()
     info = infor_user()
+    password = info[1]
     user = info[0]
-    age = info[1]
-    height = info[2]
-    weight = info[3]
-    gender = info[4]
-    act = info[5]
-
+    age = info[2]
+    height = info[3]
+    weight = info[4]
+    gender = info[5]
+    act = info[6]
+    # try:
     try:
         user.set_characteristics(age, height, weight, gender, act)
-        return render_template("calc.html")
+        try:
+            user.set_password(password)
+            return render_template("calc.html")
+        except user_work.PasswordTooShortError:
+            return render_template("failure.html") 
     except ValueError:
         return render_template("failure.html")
+    # except Passwor
     
 
 if __name__ == "__main__":

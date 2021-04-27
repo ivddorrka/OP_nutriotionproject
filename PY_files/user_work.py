@@ -1,8 +1,13 @@
 """User class example"""
 
+
+class PasswordTooShortError(Exception):
+    """To raise when password's too short"""
+    pass
+
 class User:
     """To get info from user"""
-    def __init__(self, login, password):
+    def __init__(self, login):
         """Init function"""
         self.age = None
         self.height = None
@@ -10,15 +15,21 @@ class User:
         self.gender = None
         self.activity = None
         self.login = login
-        self.password = password
+        self.password = None
 
     def set_characteristics(self, age, height, weight, gender, act):
         """To set all characteristics"""
+
         self.get_age(age)
         self.get_height(height)
         self.get_weight(weight)
         self.get_activ(act)
-
+    
+    def set_password(self, password):
+        if len(password) <8:
+            raise PasswordTooShortError("Password is too short")
+        else:
+            self.password = password
 
     def get_age(self, age):
         """To get age"""
@@ -37,7 +48,3 @@ class User:
         """To get a number of activity"""
         self.activity = float(act.split()[0])
         
-            
-# if __name__=="__main__":
-#     us = User()
-#     us.set_characteristics()
