@@ -26,7 +26,7 @@ def get_nutrients(product: str):
     info = f'Name: {food["lowercaseDescription"]}\n'
     for nutrient in food["foodNutrients"]:
         if 1000 < nutrient["nutrientId"] < 1010:
-            info+= f'{nutrient["nutrientName"]}: {nutrient["value"]} {nutrient["unitName"]}\n'
+            info+= f'{nutrient["nutrientName"]}: {nutrient["value"]} {nutrient["unitName"]}{nutrient["nutrientId"]}\n'
     info += 'Portion: 100 G'
     return info
 
