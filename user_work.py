@@ -1,4 +1,4 @@
-"""User class"""
+"""User class 1""" 
 
 
 class PasswordTooShortError(Exception):
