@@ -35,12 +35,12 @@ class Calculator:
 
     def fats_need(self):
         """
-        Return the daily amount of calories to this user (in grams).
+        Return the daily amount of fats to this user (in grams).
         """
         return round(0.3*self.calories_need()/9)
 
     def carbohydrates_need(self):
         """
-        Return the daily amount of calories to this user (in grams).
+        Return the daily amount of carbohydrates to this user (in grams).
         """
         return round(0.55*self.calories_need()/4)

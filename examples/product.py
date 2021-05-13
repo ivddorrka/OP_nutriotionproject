@@ -54,4 +54,4 @@ class Product:
                 nutrients[2] = float(nutrient["value"])
             if nutrient["nutrientId"] == '1005':
                 nutrients[3] = float(nutrient["value"])
-        return nutrients
+        return tuple(nutrients)
