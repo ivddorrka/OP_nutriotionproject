@@ -1,0 +1,57 @@
+"""
+Module for implementing product class.
+"""
+import requests
+
+
+class Product:
+    """
+    Class for product.
+    """
+
+    def __init__(self, name: str):
+        """
+        Initialize a product with its name.
+        """
+        self.name = name
+
+    def get_products(self):
+        """
+        Return the list of the names of the products which API found by users ask.
+        """
+        list_of_products = []
+        params = {'api_key': '9OdUhuqegMl7QDYKpzz9qBzqThdwgYMAlkjrogFM',
+                  'query': self.name,
+                  'dataType': 'Survey (FNDDS)'}
+        response = requests.get(
+            f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={params["api_key"]}\
+&query={params["query"]}&dataType={params["dataType"]}')
+        response = response.json()
+        for food in response["food"]:
+            list_of_products.append(food["lowercaseDescription"])
+        return list_of_products
+
+    def choose_product(self, exact_name: str):
+        """
+        Return the info about nutrients (as a tuple in order calories-lipids-fats
+        -carbohydrates) in this exact product.
+        """
+        nutrients = [0, 0, 0, 0]
+        params = {'api_key': '9OdUhuqegMl7QDYKpzz9qBzqThdwgYMAlkjrogFM',
+                  'query': exact_name,
+                  'dataType': 'Survey (FNDDS)'}
+        response = requests.get(
+            f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={params["api_key"]}\
+&query={params["query"]}&dataType={params["dataType"]}')
+        response = response.json()
+        food = response["foods"][0]
+        for nutrient in food["foodNutrients"]:
+            if nutrient["nutrientId"] == '1008':
+                nutrients[0] = float(nutrient["value"])
+            if nutrient["nutrientId"] == '1003':
+                nutrients[1] = float(nutrient["value"])
+            if nutrient["nutrientId"] == '1004':
+                nutrients[2] = float(nutrient["value"])
+            if nutrient["nutrientId"] == '1005':
+                nutrients[3] = float(nutrient["value"])
+        return tuple(nutrients)
