@@ -1,0 +1,28 @@
+<header style = 'background: #721731'>
+    <center>
+        <nav style='width: 70%; margin: 0px auto;'>
+            <ul>
+                <li><a class="active" href="/">Home</a></li>
+                <li><a href="/menu">Daily Menu</a></li>
+                <li style="float:right">
+                    <form action="/" method="post">
+                        <input name="login" placeholder="Login: " type="text"/>
+                        <input name="password" placeholder="Password: " type='text'/>
+                        <input type="submit" value="Login"/>
+                    </form>
+                    <span style="margin-left: 35px; color: white;">New here?
+                        <a style="display: inline; padding: 9px 3px;" href="/register">
+                            <input type="submit" value="Register!"/>
+                        </a>
+                    </span>
+                    <span>
+                    </span>
+                </li>
+                <li style="float:right"><a href="/profile">Profile or</a></li>
+        </nav>
+    </center>
+    <div style='margin: 0; display:flex; justify-content: space-around; align-items: center; padding: 50px; background: #333333; color: white;'>
+        <center><h1>{{title}}</h1></center>
+    </div>
+</header>
+
