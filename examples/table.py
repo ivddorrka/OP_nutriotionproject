@@ -96,9 +96,7 @@ def main(path: str, write_file: str):
                     cool_recipe = False
                 else:
                     product_ids = search_id(info[0])
-                    if not product_ids:
-                        cool_recipe = False
-                    else:
+                    if product_ids:
                         if info[2] == 'num':
                             info[1] = nums_to_grams(product_ids, info[1])[0]
                             correct_id = nums_to_grams(product_ids, info[1])[1]
@@ -124,4 +122,4 @@ def main(path: str, write_file: str):
 
 
 if __name__ == '__main__':
-    main('recipes3.csv', 'recipes3_new.csv')
+    main('recipes3.csv', 'recipes2_new.csv')
