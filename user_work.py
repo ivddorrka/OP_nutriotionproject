@@ -16,6 +16,7 @@ class User:
         self.activity = None
         self.login = login
         self.password = None
+        self.current_menu = None
 
     def set_characteristics(self, age, height, weight, gender, act):
         """To set all characteristics"""
@@ -53,3 +54,6 @@ class User:
         """To set a choosen gender"""
         self.gender = gender
         
+    def set_current_menu(self, menu):
+        self.current_menu = menu
+
