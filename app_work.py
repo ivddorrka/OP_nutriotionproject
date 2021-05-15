@@ -1,17 +1,24 @@
 """
 Website v0
 """
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, session, redirect, url_for, render_template, request
 import user_work
+import user_db
+from markupsafe import escape
 
 app = Flask(__name__)
+
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+users_db = user_db.UserDB()
 
 @app.route("/")
 def home():
     """
     Home page
     """
-    return render_template("home.html", title='Home page')
+    username = escape(session['username']) if 'username' in session else False
+    users = users_db.users
+    return render_template("home.html", title='Home page', username=username, users=users)
 
 
 @app.route("/", methods=["POST"])
@@ -19,21 +26,40 @@ def login():
     """
     This is post request to home page
     """
-    login = request.form.get("login")
-    password = request.form.get("password")    
-    # And then create user session
-    return render_template("home.html")
+    try:
+        login = request.form['login']
+        password = request.form['password']
+
+        if users_db.get(login).password == password:
+            session['username'] = request.form['login']
+            return redirect(url_for('home', title='Home page', message='Login successful'))
+        else:
+            return redirect(url_for('home', title='Home page', message='Wrong password'))
+    except user_db.UserNotFound:
+        return redirect(url_for('home', title='Eror', message='No such user'))
 
 
 @app.route('/register', methods=['GET'])
 def register_page():
-    return render_template("registration.html", title='Register')
-
+    if 'username' not in session:
+        return render_template('registration.html')
+    else:
+        return "Your are already logged in"
 
 
 @app.route('/profile')
 def profile():
-    return render_template("profile.html", title='Profile')
+    if 'username' in session:
+        return render_template("profile.html", title='Profile', username = escape(session['username']), logged_in_status=True)
+    return "You are not logged in"
+
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('home', title='Home page', message='Logout successful'))
+
 
 @app.route('/profile', methods=['POST'])
 def profile_update():
@@ -82,6 +108,8 @@ def file_html():
         user.set_characteristics(age, height, weight, gender, act)
         try:
             user.set_password(password)
+            users_db.add(user)
+            return users_db.__str__()
             return render_template("calc.html")
         except user_work.PasswordTooShortError:
             return render_template("failure.html")
