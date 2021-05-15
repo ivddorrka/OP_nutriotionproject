@@ -3,8 +3,8 @@ Module for implementing menu class.
 """
 import csv
 import random
-from dish import Dish
-from product import Product
+from modules.dish import Dish
+from modules.product import Product
 
 
 class Menu:
@@ -38,7 +38,8 @@ class Menu:
                      str(dish.instruction) + '\n\nCalories: ' +
                      str(dish.calories) + '\nProteins: ' + str(dish.proteins) +
                      '\nFats: ' + str(dish.fats) +
-                     '\nCarbohydrates: ' + str(dish.carbohydrates) + '\n\n')
+                     '\nCarbohydrates: ' + str(dish.carbohydrates) + '\n\n' +
+                     '-----------------------------------------------------')
         return menu
 
     def choose_dishes(self):
