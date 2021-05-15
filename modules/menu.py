@@ -34,10 +34,11 @@ class Menu:
         """
         menu = ''
         for dish in self.menu:
-            menu += (dish.name + '\ncalories = ' +
-                     str(dish.calories) + '\nproteins = ' + str(dish.proteins) +
-                     '\nfats = ' + str(dish.fats) +
-                     '\ncarbohydrates = ' + str(dish.carbohydrates) + '\n\n')
+            menu += (dish.name + '\n\nProducts: ' + str(dish.products) + '\n\nInsruction: ' +
+                     str(dish.instruction) + '\n\nCalories: ' +
+                     str(dish.calories) + '\nProteins: ' + str(dish.proteins) +
+                     '\nFats: ' + str(dish.fats) +
+                     '\nCarbohydrates: ' + str(dish.carbohydrates) + '\n\n')
         return menu
 
     def choose_dishes(self):
@@ -45,7 +46,7 @@ class Menu:
         Search for the dishes which user will eat. Return list of these dishes.
         """
         possible_dishes = []
-        with open("recipes2_new.csv") as recipes_base:
+        with open("recipes.csv") as recipes_base:
             recipes_csv = csv.reader(recipes_base, delimiter=',')
             for dish in recipes_csv:
                 cool_recipe = True
@@ -55,6 +56,9 @@ class Menu:
                         break
                 if float(dish[3]) == 0.0 or float(dish[4]) == 0.0 or float(dish[5]) == 0.0 or\
                         float(dish[6]) == 0.0:
+                    cool_recipe = False
+                if float(dish[3]) > self.calories or float(dish[4]) > self.proteins or float(dish[5]) > self.fats or\
+                        float(dish[6]) > self.carbohydrates:
                     cool_recipe = False
                 if cool_recipe:
                     possible_dishes.append(Dish(dish[0], dish[2], dish[1], float(dish[3]),
@@ -70,8 +74,7 @@ class Menu:
         fats = 0
         carbohydrates = 0
 
-        # сніданок рандомно обираємо але так, щоб калораж був у межах
-        # 20-37.5% від денної норми калорій.
+        # our breakfast's nutrients should be less than 40% of daily intake
         random.shuffle(self.all_dishes)
         for dish in self.all_dishes:
             if (dish.calories <= self.calories * 0.4 and
@@ -86,7 +89,7 @@ class Menu:
                 self.menu.append(breakfast)
                 break
 
-        # обід зі сніданком має займати 60-80% калорій, білків, жирів та вуглеводів.
+        # our lunch's nutrients should be more than 50% of daily intake and less than 90% of daily intake
         for dish in self.all_dishes:
             if (self.calories * 0.5 <= calories + dish.calories <= self.calories * 0.9 and
                     self.proteins * 0.5 <= proteins + dish.proteins <= self.proteins * 0.9 and
@@ -100,8 +103,7 @@ class Menu:
                 self.menu.append(lunch)
                 break
 
-        # вечерю обираємо так, щоб калорії були в межах 95-105% від денної норми,
-        # білки та вуглеводи - 90-110%, а жири - 90-105%.
+        # our dinner's nutrients should be more than 85% of daily intake and less than 115% of daily intake
         for dish in self.all_dishes:
             if (self.calories * 0.85 <= calories + dish.calories <= self.calories * 1.15 and
                     self.proteins * 0.85 <= proteins + dish.proteins <= self.proteins * 1.15 and
@@ -115,7 +117,7 @@ class Menu:
                 self.menu.append(dinner)
                 break
 
-        while len(self.menu) != 3:  # що якщо не знайде
+        while len(self.menu) != 3:
             self.menu.clear()
             self.generate_menu()
 
@@ -129,7 +131,8 @@ class Menu:
         fats = self.menu[0].fats + self.menu[1].fats
         carbohydrates = self.menu[0].carbohydrates + self.menu[1].carbohydrates
 
-        for dish in random.shuffle(self.all_dishes):
+        random.shuffle(self.all_dishes)
+        for dish in self.all_dishes:
             if (self.calories * 0.85 <= calories + dish.calories <= self.calories * 1.15 and
                     self.proteins * 0.85 <= proteins + dish.proteins <= self.proteins * 1.15 and
                     self.fats * 0.85 <= fats + dish.fats <= self.fats * 1.15 and
@@ -151,19 +154,23 @@ class Menu:
         self.daily_calories += dish.calories
         self.daily_proteins += dish.proteins
         self.daily_fats += dish.fats
-        self.daily_carbohydrates += self.carbohydrates
+        self.daily_carbohydrates += dish.carbohydrates
 
-    # user choose product_name and enters the exact_name from list, сайт
-    def search_product(self, product_name: str):
+    # user choose product_name and enters the exact_name from list
+    def search_product(self, product_name: str) -> list:
         """
-        Search for the product in database.
+        Search for the product in database, return the list of possible products.
         """
         product = Product(product_name)
         possible_list = product.get_products()
-        print(possible_list)  # сайт
-        exact_name = input()  # сайт
-        weight = float(input())  # сайт
-        nutrients = product.choose_product(exact_name, weight)
+        return possible_list
+
+    def choose_product(self, exact_name: str, weight: float):
+        """
+        Adds info about calories and nutrients
+        about product with the given name and weight.
+        """
+        nutrients = Product('').choose_product(exact_name, weight)
         self.daily_calories += nutrients[0]
         self.daily_proteins += nutrients[1]
         self.daily_fats += nutrients[2]
