@@ -12,18 +12,25 @@
         <h2> Menu 2: {{menu2}} </h2>
         <h2> Menu 3: {{menu3}} </h2>
         <h2> Menu 4: {{menu4}} </h2>
-        <h6>Calories: {{ cal }}</h6>
-        <h6>Lipids: {{ lip }}</h6>
-        <h6>Fats: {{ fat }}</h6>
-        <h6>Carbohydrates: {{ carb }}</h6>
         {% else %}
         <h1>You have no menu yet</h1>
         {% endif %}
         <form action="/menu" method="post">
-            <input type="submit" value="Regenerate"/>
-        </form>
-        <form action="/menuopt" method="post">
-            <input type="submit" value="Add you menu"/>
+
+        <select name="dish_change", class="selectpicker form-control">
+            <h3>Choose which menu to change</h3>
+            <option value="first">first</option>
+            <option value="second">second</option>
+            <option value="third">third</option>
+            <option value="None">None</option>
+            <option value="all">all</option>
+
+        <!-- </select>
+        <select name="choice", class="selectpicker form-control">
+            <option value="Regenerate">Regenerate</option>
+            <option value="Finish">Finish</option> -->
+        </select>
+            <input type="submit" value="Apply"/>
         </form>
     </body>
 </html>

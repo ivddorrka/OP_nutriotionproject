@@ -120,10 +120,10 @@ class Menu:
         while len(self.menu) != 3:
             self.menu.clear()
             self.generate_menu()
-        self.daily_calories = calories
-        self.daily_carbohydrates = carbohydrates
-        self.daily_fats = fats 
-        self.daily_proteins = proteins
+        # self.daily_calories = calories
+        # self.daily_carbohydrates = carbohydrates
+        # self.daily_fats = fats 
+        # self.daily_proteins = proteins
 
     def generate_dish(self):
         """
@@ -177,14 +177,14 @@ class Menu:
         self.daily_carbohydrates += nutrients[3]
 
 
-if __name__ == '__main__':
-    menu = Menu(1900, 60, 65, 290, [])
-    # print(menu.choose_dishes())
-    menu.generate_menu()
-    print(menu)
-    # print(''.join(str(menu).split('----------')[2]).split('Products')[0].split('\n\n')[0])
-    # print(menu)
-    # name = ''.join(str(menu).split('----------')[2]).split('Products')[0].split('\n\n')[0]
-    # menu.accept_dish(name)
-    print(menu.daily_calories)
+# if __name__ == '__main__':
+#     menu = Menu(1900, 60, 65, 290, [])
+#     # print(menu.choose_dishes())
+#     menu.generate_menu()
+#     print(str(menu.menu[0]))
+#     # print(''.join(str(menu).split('----------')[2]).split('Products')[0].split('\n\n')[0])
+#     # print(menu)
+#     # name = ''.join(str(menu).split('----------')[2]).split('Products')[0].split('\n\n')[0]
+#     # menu.accept_dish(name)
+#     # print(menu.daily_calories)
 

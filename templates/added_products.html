@@ -5,9 +5,12 @@
 <body style="margin=0; padding: 0">
     {% include 'header.html' %}
     <main>
-        <form action="/menuopt/subm" method="post">
-            <input name="keyword" placeholder="Food: " type="text"/>
-            <input class = clicker type="submit" value="Next"/>
+        <form action="/menuopt/subm/choice" method="post">
+            <h>KOSHIK</h>
+            {% for pr in vars %}
+            <h>{{ pr }}</h>
+            {% endfor %}
+            <a href = "/menuopt">Add more products</a>
         </form>
     </main>
 </body>

@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SOME SHIT</title>
+    </head>
+    <body>
+        {% if menu1 %} 
+        <h1> You have menu !!!</h1>
+        <h2> Menu 1: {{menu1}} </h2>
+        <h2> Menu 2: {{menu2}} </h2>
+        <h2> Menu 3: {{menu3}} </h2>
+        {% else %}
+        <h1>You have no menu yet</h1>
+        {% endif %}
+        <h>You'll eat this much</h>
+        <h2> Calories 1: {{cal}} </h2>
+        <h2> Proteins 2: {{prot}} </h2>
+        <h2> Fats 3: {{fats}} </h2>
+        <h2> Carbohydrates: {{carbs}} </h2>
+        <form action="/profile" method="post">
+            <input type="submit" value="Back"/>
+        </form>
+    </body>
+</html>

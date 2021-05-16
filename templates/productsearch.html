@@ -7,15 +7,15 @@
     </head>
     <body>
         <h1>Your nutrition table</h1>
-        <form action="/menuopt/choice" method="post">
+        <form action="/menuopt/subm/choice" method="post">
                 <select name="menu" class="selectpicker form-control">
                   {% for pr in vars %}
                   <option value="first">{{ pr }}</option>
                   {% endfor %}
             </select>
             <input name="keyword" placeholder="Enter weight in grams" type='text'/>
-            <a href = "/menuopt">Add more products</a>
-            <a href = "/menu">Finish</a>
+            <a href = "/profile"></a>
+            <!-- <a href = "/profile">Apply</a> -->
 
           </form>
 </html>
