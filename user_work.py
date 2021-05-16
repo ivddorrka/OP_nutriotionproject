@@ -20,15 +20,18 @@ class User:
 
     def set_characteristics(self, age, height, weight, gender, act):
         """To set all characteristics"""
-
-        self.get_age(age)
-        self.get_height(height)
-        self.get_weight(weight)
-        self.get_activ(act)
-        self.set_gender(gender)
+        try:
+            self.get_age(age)
+            self.get_height(height)
+            self.get_weight(weight)
+            self.get_activ(act)
+            self.set_gender(gender)
+            return True
+        except ValueError:
+            return False
     
     def set_password(self, password):
-        if len(password) <8:
+        if len(password) < 8:
             raise PasswordTooShortError("Password is too short")
         else:
             self.password = password

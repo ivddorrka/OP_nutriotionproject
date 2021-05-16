@@ -6,6 +6,7 @@ import user_work
 import user_db
 from markupsafe import escape
 from calculator import Calculator
+from product import Product
 from menu import Menu
 
 app = Flask(__name__)
@@ -114,7 +115,8 @@ def infor_user():
     gender = request.form.get("gender")
     act = request.form.get("comp_select")
     user = user_work.User(login)
-    backup_user(login, password, height, weight, age, gender, act, [])
+    if user.set_characteristics(age, height, weight, gender, act):
+        backup_user(login, password, height, weight, age, gender, act, [])
     return user, password, age, height, weight, gender, act
 
 
@@ -150,9 +152,7 @@ def generate_menu_page():
     '''
     This route is used to calculated parameters and then create menu,
     which is then attached to user instance (new attribute).
-
     Clicking "Generate" button on base.html page redirects to this route.
-
     If no username in session, redirects to home page
     '''
     if 'username' in session:
@@ -161,27 +161,112 @@ def generate_menu_page():
         menu = Menu(calc.calories_need(), calc.proteins_need(), calc.fats_need(),\
                     calc.carbohydrates_need(), [])
         menu.generate_menu()
-        user_obj.set_current_menu(menu.menu)
-        return render_template("base.html", title='Menu', menu=user_obj.current_menu)
+        user_obj.set_current_menu(menu)
+        m1 = ''.join(str(menu).split('----------')[0])
+        m2 = ''.join(str(menu).split('----------')[1])
+        m3 = ''.join(str(menu).split('----------')[2])
+        cal = menu.daily_calories
+        lip = menu.daily_proteins
+        fat = menu.daily_fats
+        carb = menu.daily_carbohydrates
+        return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3, cal=cal, lip=lip, fat=fat, carb=carb)
     else:
         return redirect(url_for('home', title='Home page', message='Not logged in', username=False))
 
-
+a = []
 @app.route('/menu', methods=['get'])
 def get_menu_page():
     '''
     This route renders base.html page with menu if it is generated or with single button to
     generate menu otherwise (watch base.html on the bottom)
-
     This route can not be accessed without being logged in, so sample page will be rendered
     if there is no username in session
     '''
     if 'username' in session:
         user_obj = users_db.get(escape(session['username']))
         menu_res = False if not user_obj.current_menu else user_obj.current_menu
-        return render_template("base.html", title='Menu', menu=menu_res)
+        if menu_res:
+            m1 = ''.join(str(menu_res).split('----------')[0])
+            m2 = ''.join(str(menu_res).split('----------')[1])
+            m3 = ''.join(str(menu_res).split('----------')[2])
+            m4 = 'Your menu'
+            cal = menu_res.daily_calories
+            lip = menu_res.daily_proteins
+            fat = menu_res.daily_fats
+            carb = menu_res.daily_carbohydrates
+
+            if len(a) != 0:
+                for i in a:
+                    cal += i[0]
+                    lip += i[1]
+                    fat += i[2]
+                    carb += i[3]
+            return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3, cal=cal, lip=lip, fat=fat, carb=carb)
+        else:
+            return render_template("base.html", title='Menu', menu1='None yet', menu2='None yet', menu3='None yet',  menu4='Your menu')
     else:
         return "You are not logged in"
+
+
+# @app.route('/menuopt', methods=['post'])
+# def find_smth():
+#     if 'username' in session:
+#         return render_template('menuoptional.html')
+#     else:
+#         return "You are not logged in"
+
+
+@app.route('/menuopt', methods=['post'])
+def own_menu():
+    if 'username' in session:
+        user_obj = users_db.get(escape(session['username']))
+        food = request.form.get('keyword')
+        pr = Product(food)
+        print(food)
+        try:
+            lst = pr.get_products()
+            if len(lst) > 0:
+                return render_template('productsearch.html', vars=lst)
+            else:
+                return "No products found"
+        except IndexError:
+            return "No products"
+    else:
+        return "You are not logged in"
+
+# a = []
+# @app.route('/menuopt', methods=['post'])
+# def find_smth():
+#     if 'username' in session:
+#         return render_template('menuoptional.html')
+#     else:
+#         return "You are not logged in"
+
+
+@app.route('/menuopt/choice', methods=['get'])
+def add_cals1():
+    if 'username' in session:
+        return render_template('productsearch.html')
+    else:
+        return "You are not logged in"
+
+# @app.route('/menuopt/choice', methods=['get'])
+# def add_cals():
+#     if 'username' in session:
+#         user_obj = users_db.get(escape(session['username']))
+#         food = request.form.get("menu")
+#         weight = request.form.get('keyword')
+#         pr = Product(food)
+#         try:
+#             weig = float(weight)
+#             lst_here = pr.choose_product(food, weight)
+#             a.append(lst_here)
+#             return render_template('productsearch.html')
+#         except TypeError:
+#             return "Wrong weight"
+#     else:
+#         return "You are not logged in"
+
 
 
 

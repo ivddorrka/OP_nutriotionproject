@@ -6,52 +6,24 @@
         <title>SOME SHIT</title>
     </head>
     <body>
-        <table align="center" cellspacing="10" border="10" cellpadding="5" width="600" bgcolor="#add8e6", height="100%">
-            <caption>Your nutrition table</caption>
-            <tr>
-                <th>Calories</th>
-                <th>Proteins</th>
-                <th>Fats</th>
-                <th>Carbohydrates</th>
-            </tr>
-            <tr><td>{p3:}</td><td>{p5:}</td><td>{p7:}</td><td>{p9:}</td></tr>
-        </table>
-
-        <table align="center" cellspacing="2" border="1" cellpadding="5" width="600" bgcolor="#add8e6", height="100%">
-            <caption>Menu for you</caption>
-            <tr>
-                <th>Sum calories</th>
-                <th>Menu</th>
-            </tr>
-            <tr>
-            </tr>
-        </table> 
-        <form action="/next" method="post">
-            <select name="check" class="selectpicker form-control">
-                <option value="menu">Menu1</option>
-                <option value="menu">Menu2</option>
-                <option value="menu">Menu3</option>
-            </select>    
-            <p><input class = clicker type="submit" value="Calculate..."/></p>
-            <table align="center" cellspacing="10" border="10" cellpadding="5" width="600" bgcolor="#add8e6", height="100%">
-                <caption>You've eaten this much</caption>
-                <tr>
-                    <th>Calories</th>
-                    <th>Proteins</th>
-                    <th>Fats</th>
-                    <th>Carbohydrates</th>
-                </tr>
-                <tr><td>{p11:}</td><td>{p12:}</td><td>{p13:}</td><td>{p14:}</td></tr>
-            </table>
-        </form>
-        
-        {% if menu %} 
-        <h1> You have menu !!! : {{menu}} </h1>
+        {% if menu1 %} 
+        <h1> You have menu !!!</h1>
+        <h2> Menu 1: {{menu1}} </h2>
+        <h2> Menu 2: {{menu2}} </h2>
+        <h2> Menu 3: {{menu3}} </h2>
+        <h2> Menu 4: {{menu4}} </h2>
+        <h6>Calories: {{ cal }}</h6>
+        <h6>Lipids: {{ lip }}</h6>
+        <h6>Fats: {{ fat }}</h6>
+        <h6>Carbohydrates: {{ carb }}</h6>
         {% else %}
         <h1>You have no menu yet</h1>
         {% endif %}
         <form action="/menu" method="post">
             <input type="submit" value="Regenerate"/>
+        </form>
+        <form action="/menuopt" method="post">
+            <input type="submit" value="Add you menu"/>
         </form>
     </body>
 </html>

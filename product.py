@@ -56,3 +56,10 @@ class Product:
             if nutrient["nutrientId"] == 1005:
                 nutrients[3] = weight*float(nutrient["value"])/100
         return tuple(nutrients)
+
+
+if __name__ == "__main__":
+    pr = Product('ham')
+    last = pr.get_products()
+    # print(pr.choose_product(last, 25.6))
+    print(last)

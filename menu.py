@@ -38,7 +38,7 @@ class Menu:
                      str(dish.instruction) + '\n\nCalories: ' +
                      str(dish.calories) + '\nProteins: ' + str(dish.proteins) +
                      '\nFats: ' + str(dish.fats) +
-                     '\nCarbohydrates: ' + str(dish.carbohydrates) + '\n\n')
+                     '\nCarbohydrates: ' + str(dish.carbohydrates) + '\n\n'+'----------')
         return menu 
 
     def choose_dishes(self):
@@ -120,6 +120,10 @@ class Menu:
         while len(self.menu) != 3:
             self.menu.clear()
             self.generate_menu()
+        self.daily_calories = calories
+        self.daily_carbohydrates = carbohydrates
+        self.daily_fats = fats 
+        self.daily_proteins = proteins
 
     def generate_dish(self):
         """
@@ -157,16 +161,16 @@ class Menu:
         self.daily_carbohydrates += dish.carbohydrates
 
     # user choose product_name and enters the exact_name from list, сайт
-    def search_product(self, product_name: str):
+    def search_product(self, product_name: str, weight):
         """
         Search for the product in database.
         """
         product = Product(product_name)
         possible_list = product.get_products()
-        print(possible_list)  # сайт
-        exact_name = input()  # сайт
-        weight = float(input())  # сайт
-        nutrients = product.choose_product(exact_name, weight)
+        # print(possible_list)  # сайт
+        # exact_name = input()  # сайт
+        # weight = float(input())  # сайт
+        nutrients = product.choose_product(product_name, weight)
         self.daily_calories += nutrients[0]
         self.daily_proteins += nutrients[1]
         self.daily_fats += nutrients[2]
@@ -175,5 +179,12 @@ class Menu:
 
 if __name__ == '__main__':
     menu = Menu(1900, 60, 65, 290, [])
+    # print(menu.choose_dishes())
     menu.generate_menu()
     print(menu)
+    # print(''.join(str(menu).split('----------')[2]).split('Products')[0].split('\n\n')[0])
+    # print(menu)
+    # name = ''.join(str(menu).split('----------')[2]).split('Products')[0].split('\n\n')[0]
+    # menu.accept_dish(name)
+    print(menu.daily_calories)
+
