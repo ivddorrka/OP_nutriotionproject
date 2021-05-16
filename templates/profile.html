@@ -1,0 +1,16 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
+</head>
+
+<body style="margin=0; padding: 0">
+    
+    {% include 'header.html' %}
+
+    <center><h1>Hello {{username}}</h1></center>
+    <main>
+        <form action="/profile" method="post">
+            {% include 'parameters_form.html' %}
+            <input class = clicker type="submit" value="Update"/>
+        </form>
+    </main>
+</body>

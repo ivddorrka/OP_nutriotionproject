@@ -1,0 +1,62 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+nav {
+    padding: 25px 0;
+    width: 70%;
+    margin: 0px auto;
+}
+
+header{
+    background: #721731;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 9px 16px;
+  text-decoration: none;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+form{
+    display: inline;
+    margin: 0;
+}
+input[type = submit] {
+    background: none;
+    border: 3px solid black;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 7px 40px;
+    border-radius: 7px;
+    transition: 0.5s;
+    color: black;
+}
+input[type=submit]:hover {
+    background: black;
+    color: white;
+}
+
+main{
+    width: 70%;
+    margin: 15px auto;
+}
+
+input {
+    margin: 5px;
+}
+
+
