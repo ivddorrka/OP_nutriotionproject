@@ -193,7 +193,7 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'second':
                 menu_use.delete_dish(menu_use.menu[1])
                 menu_use.generate_dish()
@@ -201,7 +201,7 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'third':
                 # menu1 = menu.generate_menu()
                 menu_use.delete_dish(menu_use.menu[2])
@@ -209,14 +209,14 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             else:
                 menu_use.generate_menu()
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             # where_next = request.form.get('choice')
         else:
@@ -238,7 +238,8 @@ def generate_menu_page():
             menu_final.clear()
             db_dishes.clear()
             menu_final.append(menu_use)
-            return redirect(url_for('home', title='Home page', message='Added daily menu successfuly'))
+
+            return redirect(url_for('home', title='Home page', username = escape(session['username']), message='Added daily menu successfuly'))
             # return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
         return redirect(url_for('home', title='Home page', message='Not logged in', username=False))
@@ -260,9 +261,9 @@ def get_menu_page():
             m1 = ''.join(str(menu_res).split('----------')[0])
             m2 = ''.join(str(menu_res).split('----------')[1])
             m3 = ''.join(str(menu_res).split('----------')[2])
-            return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
+            return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
         else:
-            return render_template("base.html", title='Menu', menu1='None yet', menu2='None yet', menu3='None yet',  menu4='Your menu')
+            return render_template("base.html", username = escape(session['username']), title='Menu', menu1='None yet', menu2='None yet', menu3='None yet',  menu4='Your menu')
     else:
         return "You are not logged in"
 
@@ -277,7 +278,7 @@ def get_menu_page():
 @app.route('/menuopt', methods=['GET'])
 def menuuuu():
     if 'username' in session:
-        return render_template('menuoptional.html')
+        return render_template('menuoptional.html', username = escape(session['username']))
     else:
         return "Your are not logged in"
 
@@ -293,7 +294,7 @@ def add_cals1():
         for i in lst:
             lyst.append(i)
         if len(lst) != 0:
-            return render_template('productsearch.html', vars=lst)
+            return render_template('productsearch.html', username = escape(session['username']), vars=lst)
         else:
             return render_template("failure.html")
     else:
@@ -304,7 +305,7 @@ def add_cals1():
 @app.route('/menuopt/subm/choice', methods=['GET'])
 def all_of_them():
     if 'username' in session:
-        return render_template('productsearch.html', vars=lyst)
+        return render_template('productsearch.html', username = escape(session['username']), vars=lyst)
     else:
         return "Your are not logged in"
 
@@ -327,7 +328,7 @@ def add_cals():
             # print(lst_here)
             # print(a)
             # for i in range(len(a)):
-            return render_template('added_products.html', vars=nutr)
+            return render_template('added_products.html', username = escape(session['username']), vars=nutr)
         except TypeError:
             return "Wrong weight"
     else:
@@ -337,12 +338,9 @@ def add_cals():
 @app.route('/final', methods=['get'])
 def calc_last():
     if 'username' in session:
-        print(len(lyst))
-        print(len(a))
-        print(a)
+
         # print(len(menu_final[0]))
         # print(menu_final[0])
-        print(len(str(menu_final[0]).split('----------')))
         cals=0
         fats=0
         prots=0
@@ -355,7 +353,7 @@ def calc_last():
         m1 = ''.join(str(menu_final[0]).split('----------')[0])
         m2 = ''.join(str(menu_final[0]).split('----------')[1])
         m3 = ''.join(str(menu_final[0]).split('----------')[2])
-        return render_template('dishtoday.html', menu1=m1, menu2=m2, menu3=m3, cal=cals, prot=prots, fats=fats, carbs=carbs)
+        return render_template('dishtoday.html', username = escape(session['username']), menu1=m1, menu2=m2, menu3=m3, cal=cals, prot=prots, fats=fats, carbs=carbs)
     else:
         return "Your are not logged in"
 

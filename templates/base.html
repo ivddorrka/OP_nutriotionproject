@@ -3,9 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SOME SHIT</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
+        <title>Menu</title>
     </head>
     <body>
+        {% include 'header.html' %}
         {% if menu1 %} 
         <h1> You have menu !!!</h1>
         <h2> Menu 1: {{menu1}} </h2>
