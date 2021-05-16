@@ -1,0 +1,5 @@
+*.csv
+.~lock.recipes.csv#
+PY_files/__pycache__/
+resipe_nalyse.py
+
