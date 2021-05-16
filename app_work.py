@@ -85,6 +85,8 @@ def profile():
 def logout():
     # remove the username from the session if it's there
     session.pop('username', None)
+    a.clear()
+    menu_final.clear()
     return redirect(url_for('home', title='Home page', message='Logout successful'))
 
 
@@ -164,7 +166,9 @@ def generate_menu_page():
     Clicking "Generate" button on base.html page redirects to this route.
     If no username in session, redirects to home page
     '''
+    # menu_final.clear()
     if 'username' in session:
+        menu_final.clear()
         user_obj = users_db.get(escape(session['username']))
         calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
         menu = Menu(calc.calories_need(), calc.proteins_need(), calc.fats_need(),\
@@ -186,7 +190,7 @@ def generate_menu_page():
                 menu_use.delete_dish(menu_use.menu[0])
                 menu_use.generate_dish()
                 # menu1 = menu.generate_menu()
-                m1 = ''.join(str(menu11).split('----------')[0])
+                m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
                 return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
@@ -195,7 +199,7 @@ def generate_menu_page():
                 menu_use.generate_dish()
                 # menu1 = menu.generate_menu()
                 m1 = ''.join(str(menu_use).split('----------')[0])
-                m2 = ''.join(str(menu11).split('----------')[1])
+                m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
                 return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'third':
@@ -204,7 +208,7 @@ def generate_menu_page():
                 menu_use.generate_dish()   
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
-                m3 = ''.join(str(menu11).split('----------')[2])
+                m3 = ''.join(str(menu_use).split('----------')[2])
                 return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             else:
@@ -217,8 +221,14 @@ def generate_menu_page():
             # where_next = request.form.get('choice')
         else:
             # if where_next != "Regenerate":
-            for i in menu_use.menu:
-                menu_use.accept_dish(i)
+            # print(len(str(menu_use.menu).split('----------')[-3:]))
+            # for i in str(menu_use.menu).split('----------')[-3:]:
+            # print(len(menu_use.menu))
+            menu_use.accept_dish(menu_use.menu[0])
+            menu_use.accept_dish(menu_use.menu[2])
+            menu_use.accept_dish(menu_use.menu[1])
+
+
             cal = menu_use.daily_calories
             prot = menu_use.daily_proteins
             fats = menu_use.daily_fats
@@ -229,7 +239,6 @@ def generate_menu_page():
             db_dishes.clear()
             menu_final.append(menu_use)
             return redirect(url_for('home', title='Home page', message='Added daily menu successfuly'))
-
             # return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
         return redirect(url_for('home', title='Home page', message='Not logged in', username=False))
@@ -328,8 +337,12 @@ def add_cals():
 @app.route('/final', methods=['get'])
 def calc_last():
     if 'username' in session:
+        print(len(lyst))
+        print(len(a))
+        print(a)
         # print(len(menu_final[0]))
-        print(menu_final[0])
+        # print(menu_final[0])
+        print(len(str(menu_final[0]).split('----------')))
         cals=0
         fats=0
         prots=0

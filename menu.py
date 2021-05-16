@@ -69,6 +69,8 @@ class Menu:
         """
         Generates menu which consists of 3 different dishes to the user.
         """
+        self.menu.clear()
+
         calories = 0
         proteins = 0
         fats = 0
@@ -130,6 +132,7 @@ class Menu:
         Add new dish to the menu if user wanted to change the current one.
         !Prerequirements: this method generates the third meal, two others stay.
         """
+        # self.menu.clear()
         calories = self.menu[0].calories + self.menu[1].calories
         proteins = self.menu[0].proteins + self.menu[1].proteins
         fats = self.menu[0].fats + self.menu[1].fats
