@@ -221,9 +221,6 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                # user_obj.current_menu = [m1, m2, m3]
-                user_obj.current_menu = [
-                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
                 return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'second':
                 menu_use.delete_dish(menu_use.menu[1])
@@ -232,8 +229,6 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [
-                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
                 return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'third':
                 # menu1 = menu.generate_menu()
@@ -242,9 +237,6 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                # user_obj.current_menu = [m1, m2, m3]
-                user_obj.current_menu = [
-                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
                 return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             else:
@@ -252,9 +244,6 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [
-                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
-                # user_obj.current_menu = [m1, m2, m3]
                 return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             # where_next = request.form.get('choice')
@@ -278,9 +267,9 @@ def generate_menu_page():
             menu_final.append(menu_use)
 
             return redirect(url_for('home', title='Home page', username=escape(session['username']), message='Added daily menu successfuly'))
-            # return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
+    # return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
-        return render_template("failure.html", message="Not logged in", username=False)
+        return redirect(url_for('home', title='Home page', message='Not logged in', username=False))
 
 # a = []
 
@@ -390,36 +379,18 @@ def calc_last():
 
         # print(len(menu_final[0]))
         # print(menu_final[0])
-
-        user_obj = users_db.get(escape(session['username']))
-        menu_res = False if not user_obj.current_menu else user_obj.current_menu
-
         cals = 0
         fats = 0
         prots = 0
         carbs = 0
         for i in a:
             cals += i[0]
-            prots += i[1]
-            fats += i[2]
+            fats += i[1]
+            prots += i[2]
             carbs += i[3]
-        if menu_res:
-            for dish in user_obj.current_menu:
-                cals += dish.calories
-                fats += dish.fats
-                prots += dish.proteins
-                carbs += dish.carbohydrates
-
-            m1 = menu_res[0]
-            m2 = menu_res[1]
-            m3 = menu_res[2]
-            # m1 = ''.join(str(menu_final[0]).split('----------')[0])
-            # m2 = ''.join(str(menu_final[0]).split('----------')[1])
-            # m3 = ''.join(str(menu_final[0]).split('----------')[2])
-        else:
-            m1 = []
-            m2 = []
-            m3 = []
+        m1 = ''.join(str(menu_final[0]).split('----------')[0])
+        m2 = ''.join(str(menu_final[0]).split('----------')[1])
+        m3 = ''.join(str(menu_final[0]).split('----------')[2])
         return render_template('dishtoday.html', username=escape(session['username']), menu1=m1, menu2=m2, menu3=m3, cal=cals, prot=prots, fats=fats, carbs=carbs)
     else:
         return "Your are not logged in"
