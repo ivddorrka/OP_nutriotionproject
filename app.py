@@ -137,7 +137,6 @@ def infor_user():
         try:
             users_db.add(user)
         except Exception as err:
-            print(err)
             return render_template("failure.html", message="User already exists", username=False)
         backup_user(login, password, height, weight, age, gender, act, [])
     return user, password, age, height, weight, gender, act
