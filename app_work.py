@@ -44,7 +44,11 @@ def home():
     Home page
     """
     username = escape(session['username']) if 'username' in session else False
-    return render_template("home.html", title='Home page', username=username)
+    if username:
+        user_obj = users_db.get(username)
+        calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
+        return render_template("home.html", title='Home page', username=username, normas=[calc.calories_need(), calc.proteins_need(), calc.fats_need(), calc.carbohydrates_need()])
+    return render_template("home.html", title='Home page', username=username, normas=[])
 
 
 @app.route("/", methods=["POST"])
@@ -68,7 +72,7 @@ def login():
 @app.route('/register', methods=['GET'])
 def register_page():
     if 'username' not in session:
-        return render_template('registration.html')
+        return render_template('registration.html', user_data=[])
     else:
         return render_template("failure.html", message="Your are already logged in", username=escape(session['username']))
 
@@ -134,6 +138,10 @@ def infor_user():
     act = request.form.get("comp_select")
     user = user_work.User(login)
     if user.set_characteristics(age, height, weight, gender, act):
+        try:
+            user_db.add(user)
+        except:
+            return render_template("failure.html", message="User already exists", username=False)
         backup_user(login, password, height, weight, age, gender, act, [])
     return user, password, age, height, weight, gender, act
 

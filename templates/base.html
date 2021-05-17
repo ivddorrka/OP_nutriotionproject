@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
         <title>Menu</title>
     </head>
-    <body style="color: white">
+    <body style="color: white; padding: 5px;">
         {% include 'header.html' %}
         {% if menu1 %} 
         <div class='pager'>
@@ -24,16 +24,19 @@
         {% else %}
         <h1>You have no menu yet. Generate it below!</h1>
         {% endif %}
-        <form action="/menu" method="post">
-            <h3>Choose which menu to change</h3>
-            <select name="dish_change", class="selectpicker form-control">
-                <option value="first">First</option>
-                <option value="second">Second</option>
-                <option value="third">Third</option>
-                <option value="None">None</option>
-                <option value="all">All</option>
-            </select>
-            <input style='width: 300px' type="submit" value="Change"/>
-        </form>
+        <div style='width: 70%; margin: 0 auto'>
+
+            <form action="/menu" method="post">
+                <h3>Choose which menu to change</h3>
+                <select name="dish_change", class="selectpicker form-control">
+                    <option value="first">First</option>
+                    <option value="second">Second</option>
+                    <option value="third">Third</option>
+                    <option value="None">None</option>
+                    <option value="all">All</option>
+                </select>
+                <input style='width: 300px' type="submit" value="Change"/>
+            </form>
+        </div>
     </body>
 </html>
