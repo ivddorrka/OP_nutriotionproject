@@ -43,7 +43,7 @@ get_backuped_users()
 @app.route("/")
 def home():
     """
-    Home page
+    Home page, renders basic front page
     """
     username = escape(session['username']) if 'username' in session else False
     if username:
@@ -73,6 +73,9 @@ def login():
 
 @app.route('/register', methods=['GET'])
 def register_page():
+    '''
+    This is get page for registration which renders form for registration
+    '''
     if 'username' not in session:
         return render_template('registration.html', user_data=[])
     else:
@@ -81,6 +84,9 @@ def register_page():
 
 @app.route('/profile')
 def profile():
+    '''
+    User profile page where user information is displayed and can be changed
+    '''
     if 'username' in session:
         user_obj = users_db.get(escape(session['username']))
         age = user_obj.age
@@ -94,6 +100,9 @@ def profile():
 
 @app.route('/logout')
 def logout():
+    '''
+    Logout route to remove user from session
+    '''
     # remove the username from the session if it's there
     session.pop('username', None)
     a.clear()
@@ -318,7 +327,10 @@ def get_menu_page():
 #         return "You are not logged in"
 
 @app.route('/menuopt', methods=['GET'])
-def menuuuu():
+def menu():
+    '''
+    Get route for optional menu page: renders page with field to find custom food
+    '''
     if 'username' in session:
         return render_template('menuoptional.html', username=escape(session['username']))
     else:
@@ -330,6 +342,9 @@ lyst = []
 
 @app.route('/menuopt/subm', methods=['post'])
 def add_cals1():
+    '''
+    Post route for optional menu. Adds custom product to products
+    '''
     if 'username' in session:
         food = request.form.get("keyword")
         # food = own_menu()
@@ -349,6 +364,9 @@ def add_cals1():
 
 @app.route('/menuopt/subm/choice', methods=['GET'])
 def all_of_them():
+    '''
+    Get route to render productsearch page
+    '''
     if 'username' in session:
         return render_template('productsearch.html', username=escape(session['username']), vars=lyst)
     else:
@@ -357,6 +375,9 @@ def all_of_them():
 
 @app.route('/menuopt/subm/choice', methods=['post'])
 def add_cals():
+    '''
+    Post route for optional choice product. User's product he chose from dropdown box
+    '''
     if 'username' in session:
         # lst =
         user_obj = users_db.get(escape(session['username']))
@@ -384,6 +405,10 @@ def add_cals():
 
 @app.route('/final', methods=['get'])
 def calc_last():
+    '''
+    Get route for final menu page. Renders page with dishes and estimates how many calories
+    will user consume in general
+    '''
     if 'username' in session:
 
         # print(len(menu_final[0]))
