@@ -20,8 +20,10 @@ Read **[wiki page](https://github.com/ivddorrka/OP_nutriotionproject/wiki/Idea-o
 
 ## Installation
 
+You don't need to install anything - just follow this link: nutriotion-assistant.herokuapp.com
+
 ## Usage
- 
+ video:  https://www.youtube.com/watch?v=8G2mi83B2zI
 
 ![Screenshot](loginpage.png)
 First of all login or registrate
