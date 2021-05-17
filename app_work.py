@@ -16,7 +16,8 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 def backup_user(login, password, height, weight, age, gender, activity, current_menu):
     with open('users.csv', 'a') as f_users:
-        f_users.write(','.join([ login, password, height, weight, age, gender, activity, 'Nan' ]))
+        f_users.write(
+            ','.join([login, password, height, weight, age, gender, activity, 'Nan']))
         f_users.write('\n')
 
 
@@ -28,14 +29,15 @@ def get_backuped_users():
                 user = user_work.User(attribs[0])
 
                 user.set_password(attribs[1])
-                user.set_characteristics(attribs[4], attribs[2], attribs[3], attribs[5], attribs[6])
-                user.current_menu = None if attribs[-1].strip() == 'Nan' else attribs[-1].strip()
+                user.set_characteristics(
+                    attribs[4], attribs[2], attribs[3], attribs[5], attribs[6])
+                user.current_menu = None if attribs[-1].strip(
+                ) == 'Nan' else attribs[-1].strip()
                 users_db.add(user)
 
 
 users_db = user_db.UserDB()
 get_backuped_users()
-
 
 
 @app.route("/")
@@ -82,7 +84,7 @@ def profile():
         weight = user_obj.weight
         act = user_obj.activity
         gender = user_obj.gender
-        return render_template("profile.html", title='Profile', username = escape(session['username']), user_data=[age, height, weight, act, gender])
+        return render_template("profile.html", title='Profile', username=escape(session['username']), user_data=[age, height, weight, act, gender])
     return "You are not logged in"
 
 
@@ -116,7 +118,8 @@ def profile_update():
             for user in users_backup:
                 if user.split(',')[0].strip() != login:
                     f.write(user)
-        backup_user(user_obj.login, user_obj.password, height, weight, age, gender, act, user_obj.current_menu)
+        backup_user(user_obj.login, user_obj.password, height,
+                    weight, age, gender, act, user_obj.current_menu)
         return render_template("profile.html", title='Profile', user_data=[age, height, weight, act, gender], username=login)
 
 
@@ -162,17 +165,21 @@ def file_html():
     except ValueError:
         return render_template("failure.html")
 
-#MENU
+# MENU
+
 
 class CurrentMenu:
     def __init__(self):
         self.cur_menu = None
+
     def set_men(self, menu):
         self.cur_menu = menu
+
 
 db_dishes = []
 menu_final = []
 a = []
+
 
 @app.route('/menu', methods=['post'])
 def generate_menu_page():
@@ -186,15 +193,16 @@ def generate_menu_page():
     if 'username' in session:
         menu_final.clear()
         user_obj = users_db.get(escape(session['username']))
-        calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
-        menu = Menu(calc.calories_need(), calc.proteins_need(), calc.fats_need(),\
+        calc = Calculator(user_obj.weight, user_obj.height,
+                          user_obj.age, user_obj.gender, user_obj.activity)
+        menu = Menu(calc.calories_need(), calc.proteins_need(), calc.fats_need(),
                     calc.carbohydrates_need(), [])
 
-        menu11 = Menu(calc.calories_need(), calc.proteins_need(), calc.fats_need(),\
-                    calc.carbohydrates_need(), [])
+        menu11 = Menu(calc.calories_need(), calc.proteins_need(), calc.fats_need(),
+                      calc.carbohydrates_need(), [])
         menu11.generate_menu()
 
-        dish = request.form.get("dish_change")  
+        dish = request.form.get("dish_change")
         menu.generate_menu()
         db_dishes.append(menu)
         if dish != 'all':
@@ -210,8 +218,9 @@ def generate_menu_page():
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
                 # user_obj.current_menu = [m1, m2, m3]
-                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
-                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                user_obj.current_menu = [
+                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
+                return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'second':
                 menu_use.delete_dish(menu_use.menu[1])
                 menu_use.generate_dish()
@@ -219,27 +228,30 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
-                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                user_obj.current_menu = [
+                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
+                return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'third':
                 # menu1 = menu.generate_menu()
                 menu_use.delete_dish(menu_use.menu[2])
-                menu_use.generate_dish()   
+                menu_use.generate_dish()
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
                 # user_obj.current_menu = [m1, m2, m3]
-                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
-                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                user_obj.current_menu = [
+                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
+                return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             else:
                 menu_use.generate_menu()
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
+                user_obj.current_menu = [
+                    menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
                 # user_obj.current_menu = [m1, m2, m3]
-                return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
+                return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             # where_next = request.form.get('choice')
         else:
@@ -251,7 +263,6 @@ def generate_menu_page():
             menu_use.accept_dish(menu_use.menu[2])
             menu_use.accept_dish(menu_use.menu[1])
 
-
             cal = menu_use.daily_calories
             prot = menu_use.daily_proteins
             fats = menu_use.daily_fats
@@ -262,12 +273,14 @@ def generate_menu_page():
             db_dishes.clear()
             menu_final.append(menu_use)
 
-            return redirect(url_for('home', title='Home page', username = escape(session['username']), message='Added daily menu successfuly'))
+            return redirect(url_for('home', title='Home page', username=escape(session['username']), message='Added daily menu successfuly'))
             # return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
         return render_template("failure.html", message="Not logged in", username=False)
 
 # a = []
+
+
 @app.route('/menu', methods=['get'])
 def get_menu_page():
     """
@@ -279,7 +292,7 @@ def get_menu_page():
     if 'username' in session:
         user_obj = users_db.get(escape(session['username']))
         menu_res = False if not user_obj.current_menu else user_obj.current_menu
-        # dish = request.form.get("dish_change")            
+        # dish = request.form.get("dish_change")
         if menu_res:
             m1 = menu_res[0]
             m2 = menu_res[1]
@@ -288,8 +301,8 @@ def get_menu_page():
             m1 = []
             m2 = []
             m3 = []
-            
-        return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
+
+        return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
         return "You are not logged in"
 
@@ -304,12 +317,14 @@ def get_menu_page():
 @app.route('/menuopt', methods=['GET'])
 def menuuuu():
     if 'username' in session:
-        return render_template('menuoptional.html', username = escape(session['username']))
+        return render_template('menuoptional.html', username=escape(session['username']))
     else:
         return "Your are not logged in"
 
 
 lyst = []
+
+
 @app.route('/menuopt/subm', methods=['post'])
 def add_cals1():
     if 'username' in session:
@@ -320,7 +335,7 @@ def add_cals1():
         for i in lst:
             lyst.append(i)
         if len(lst) != 0:
-            return render_template('productsearch.html', username = escape(session['username']), vars=lst)
+            return render_template('productsearch.html', username=escape(session['username']), vars=lst)
         else:
             return render_template("failure.html")
     else:
@@ -328,10 +343,11 @@ def add_cals1():
 
 # a = []
 
+
 @app.route('/menuopt/subm/choice', methods=['GET'])
 def all_of_them():
     if 'username' in session:
-        return render_template('productsearch.html', username = escape(session['username']), vars=lyst)
+        return render_template('productsearch.html', username=escape(session['username']), vars=lyst)
     else:
         return "Your are not logged in"
 
@@ -339,7 +355,7 @@ def all_of_them():
 @app.route('/menuopt/subm/choice', methods=['post'])
 def add_cals():
     if 'username' in session:
-        # lst = 
+        # lst =
         user_obj = users_db.get(escape(session['username']))
         food = request.form.get("menu")
         weight = request.form.get('keyword')
@@ -354,12 +370,13 @@ def add_cals():
             # print(lst_here)
             # print(a)
             # for i in range(len(a)):
-            return render_template('home.html', username = escape(session['username']), vars=nutr)
+            return render_template('home.html', username=escape(session['username']), vars=nutr)
         except TypeError:
             return "Wrong weight"
     else:
         return "You are not logged in"
     # print(a)
+
 
 @app.route('/final', methods=['get'])
 def calc_last():
@@ -371,10 +388,10 @@ def calc_last():
         user_obj = users_db.get(escape(session['username']))
         menu_res = False if not user_obj.current_menu else user_obj.current_menu
 
-        cals=0
-        fats=0
-        prots=0
-        carbs=0
+        cals = 0
+        fats = 0
+        prots = 0
+        carbs = 0
         for i in a:
             cals += i[0]
             prots += i[1]
@@ -397,13 +414,13 @@ def calc_last():
             m1 = []
             m2 = []
             m3 = []
-        return render_template('dishtoday.html', username = escape(session['username']), menu1=m1, menu2=m2, menu3=m3, cal=cals, prot=prots, fats=fats, carbs=carbs)
+        return render_template('dishtoday.html', username=escape(session['username']), menu1=m1, menu2=m2, menu3=m3, cal=cals, prot=prots, fats=fats, carbs=carbs)
     else:
         return "Your are not logged in"
 
 
 # print(a)
 if __name__ == "__main__":
-    FLASK_DEBUG=1
+    FLASK_DEBUG = 1
     TEMPLATES_AUTO_RELOAD = True
     app.run(debug=True)
