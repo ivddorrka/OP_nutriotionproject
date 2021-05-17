@@ -2,12 +2,12 @@
 Website v0
 """
 from flask import Flask, session, redirect, url_for, render_template, request
-import user_work
-import user_db
+from modules import user_work
+from modules import user_db
 from markupsafe import escape
-from calculator import Calculator
-from product import Product
-from menu import Menu
+from modules.calculator import Calculator
+from modules.product import Product
+from modules.menu import Menu
 
 app = Flask(__name__)
 
@@ -48,7 +48,8 @@ def home():
     username = escape(session['username']) if 'username' in session else False
     if username:
         user_obj = users_db.get(username)
-        calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
+        calc = Calculator(user_obj.weight, user_obj.height,
+                          user_obj.age, user_obj.gender, user_obj.activity)
         return render_template("home.html", title='Home page', username=username, normas=[calc.calories_need(), calc.proteins_need(), calc.fats_need(), calc.carbohydrates_need()])
     return render_template("home.html", title='Home page', username=username, normas=[])
 
@@ -360,7 +361,8 @@ def add_cals():
     if 'username' in session:
         # lst =
         user_obj = users_db.get(escape(session['username']))
-        calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
+        calc = Calculator(user_obj.weight, user_obj.height,
+                          user_obj.age, user_obj.gender, user_obj.activity)
         food = request.form.get("menu")
         weight = request.form.get('keyword')
         pr = Product(food)
