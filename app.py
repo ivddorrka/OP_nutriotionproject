@@ -47,7 +47,12 @@ def home():
     """
     username = escape(session['username']) if 'username' in session else False
     if username:
-        user_obj = users_db.get(username)
+        try:
+            user_obj = users_db.get(username)
+        except user_db.UserNotFound:
+            user_obj = users_db.pop(username)
+            session.pop('username', None)
+            return render_template("home.html", title='Home page', username=False, normas=[])
         calc = Calculator(user_obj.weight, user_obj.height,
                           user_obj.age, user_obj.gender, user_obj.activity)
         return render_template("home.html", title='Home page', username=username, normas=[calc.calories_need(), calc.proteins_need(), calc.fats_need(), calc.carbohydrates_need()])
@@ -143,14 +148,17 @@ def file_html():
     user = user_work.User(login)
 
     try:
-        user.set_characteristics(age, height, weight, gender, act)
-        try:
-            user.set_password(password)
-            users_db.add(user)
-            backup_user(login, password, height, weight, age, gender, act, [])
-            return redirect(url_for('home', title='Home page', username=False))
-        except user_work.PasswordTooShortError:
-            return render_template("failure.html")
+        if height != "" and weight != "" and age != "" and act != "":
+            user.set_characteristics(age, height, weight, gender, act)
+            try:
+                user.set_password(password)
+                users_db.add(user)
+                backup_user(login, password, height,
+                            weight, age, gender, act, [])
+                return redirect(url_for('home', title='Home page', username=False))
+            except user_work.PasswordTooShortError:
+                return render_template("failure.html")
+        return render_template("failure.html")
     except ValueError:
         return render_template("failure.html")
 
