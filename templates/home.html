@@ -1,0 +1,35 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
+</head>
+<body style="margin=0; padding: 0">
+    {% include 'header.html' %}
+    {% include 'message_box.html' %}
+
+    {% if message %} 
+    <center>{{message}}</center>
+    {% endif %}
+
+    {% if not username %} 
+    <div class='box'>
+        <form action="/" method="post">
+            <input name="login" placeholder="Login: " type="text"/><br>
+            <input name="password" placeholder="Password: " type='text'/><br>
+            <input type="submit" value="Login"/><br>
+        </form>
+        <div style="margin-top: 100px; color: top; text-align: center; width: 100%">New here?
+            <a style="display: inline; padding: 9px 3px;" href="/register">
+                <input type="submit" value="Register!"/>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    <div style="width: 70%; margin:0 auto; color: white">
+
+        <h1>You daily intake:</h2>
+        <h2>Calories: {{ normas[0] }}</h2>
+        <h2>Proteins: {{normas[1]}}</h2>
+        <h2>Fats: {{normas[2]}}</h2>
+        <h2>Carbohydrates: {{normas[3]}}</h2>
+    </div>
+
+</body>

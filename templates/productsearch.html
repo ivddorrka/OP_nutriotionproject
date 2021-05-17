@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
+        <title>Product Search</title>
+    </head>
+    <body>
+        {% include 'header.html' %}
+        <h1>Your nutrition table</h1>
+        <form action="/menuopt/subm/choice" method="post">
+                <select name="menu" class="selectpicker form-control">
+                  {% for pr in vars %}
+                  <option value="first">{{ pr }}</option>
+                  {% endfor %}
+            </select>
+            <input name="keyword" placeholder="Enter weight in grams" type='text'/>
+            <a href = "/profile"></a>
+            <!-- <a href = "/profile">Apply</a> -->
+
+          </form>
+</html>

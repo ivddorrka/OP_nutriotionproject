@@ -1,7 +1,7 @@
 '''
 UserDB class
 '''
-from user import User
+from user_work import User
 
 class UserNotFound(Exception):
     '''

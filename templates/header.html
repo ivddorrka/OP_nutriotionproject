@@ -1,0 +1,30 @@
+<header>
+    <center>
+        <nav style='width: 70%; margin: 0px auto'>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <!-- <li><a href="/menuopt">Add My Dish to Menu</a></li> -->
+
+                {% if username %} 
+                    <li><a href="/menu">Daily Menu</a></li>
+                    <li><a href="/final">FInal Menu For Today</a></li>
+                    <li style="float:right"><a href="/logout">Logout</a></li>
+                    <li style="float:right"><a href="/profile">Profile ({{username}})</a></li>
+                    <li><a href="/menuopt">Add My Dish to Menu</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </center>
+    {% if username %} 
+        <div style='margin: 0; display:flex; justify-content: space-around; align-items: center; margin-top: 250px; padding: 50px; color: white;'>
+            <center><h1 style="font-size: 80px">{{title}}</h1></center>
+        </div>
+    {% else %}
+        <div>
+            {% for user in users %} 
+                <p> {{user.login}} </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </header>
+
