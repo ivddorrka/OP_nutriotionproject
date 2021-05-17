@@ -77,7 +77,14 @@ def register_page():
 @app.route('/profile')
 def profile():
     if 'username' in session:
-        return render_template("profile.html", title='Profile', username = escape(session['username']), logged_in_status=True)
+        user_obj = users_db.get(escape(session['username']))
+        age = user_obj.age
+        height = user_obj.height
+        weight = user_obj.weight
+        act = user_obj.activity
+        gender = user_obj.gender
+        print(act)
+        return render_template("profile.html", title='Profile', username = escape(session['username']), logged_in_status=True, user_data=[age, height, weight, act, gender])
     return "You are not logged in"
 
 
@@ -95,13 +102,25 @@ def profile_update():
     '''
     This route changes user profile
     '''
-    age = request.form.get("age")
-    height = request.form.get("height")
-    weight = request.form.get("weight")
-    gender = request.form.get("gender")
-    act = request.form.get("comp_select")
-    # update user info
-    return render_template("profile.html")
+    if 'username' in session:
+        login = escape(session['username'])
+        user_obj = users_db.get(login)
+        age = request.form.get("age")
+        height = request.form.get("height")
+        weight = request.form.get("weight")
+        gender = request.form.get("gender")
+        act = request.form.get("comp_select")
+        user_obj.set_characteristics(age, height, weight, gender, act)
+
+        with open("users.csv", "r") as f:
+            users_backup = f.readlines()
+        with open("users.csv", "w") as f:
+            for user in users_backup:
+                if user.split(',')[0].strip() != login:
+                    f.write(user)
+        backup_user(user_obj.login, user_obj.password, height, weight, age, gender, act, user_obj.current_menu)
+        print(act)
+        return render_template("profile.html", user_data=[age, height, weight, act, gender], username=login)
 
 
 @app.route("/registration", methods=["POST"])
