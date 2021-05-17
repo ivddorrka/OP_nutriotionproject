@@ -128,20 +128,6 @@ def profile_update():
         return render_template("profile.html", title='Profile', user_data=[age, height, weight, act, gender], username=login)
 
 
-@app.route("/registration", methods=["POST"])
-def infor_user():
-    """
-    To get data from user
-    """
-    if user.set_characteristics(age, height, weight, gender, act):
-        try:
-            users_db.add(user)
-        except Exception as err:
-            return render_template("failure.html", message="User already exists", username=False)
-        backup_user(login, password, height, weight, age, gender, act, [])
-    return user, password, age, height, weight, gender, act
-
-
 @app.route("/registration/submitted", methods=["POST"])
 def file_html():
     """
