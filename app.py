@@ -52,9 +52,7 @@ def home():
     Home page, renders basic front page
     """
     username = escape(session['username']) if 'username' in session else False
-    session.pop('username', None)
     if username:
-        session.pop('username', None)
         user_obj = users_db.get(username)
         calc = Calculator(user_obj.weight, user_obj.height,
                           user_obj.age, user_obj.gender, user_obj.activity)
