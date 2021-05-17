@@ -1,20 +1,24 @@
 '''
 UserDB class
 '''
-from user_work import User
+from modules.user_work import User
+
 
 class UserNotFound(Exception):
     '''
     Raises when trying to access user which is not in UserDB
     '''
+
     def __init__(self, usr_login):
         super().__init__(f'\'{usr_login}\' is not found in database')
         self.usr_login = usr_login
+
 
 class UserAlreadyExists(Exception):
     '''
     Raises when trying to add existing user or user with the same login
     '''
+
     def __init__(self, usr_login):
         super().__init__(f'\'{usr_login}\' is already in database')
         self.usr_login = usr_login
@@ -24,11 +28,11 @@ class UserDB:
     '''
     User DataBase class
     '''
+
     def __init__(self):
         self.users = []
 
-
-    def get(self, usr_login:str) -> User:
+    def get(self, usr_login: str) -> User:
         '''
         Returns User object for usr_login if user with usr_login is in UserDB.
         Otherwise raises UserNotFound exception
@@ -39,8 +43,7 @@ class UserDB:
 
         raise UserNotFound(usr_login)
 
-
-    def add(self, user:User):
+    def add(self, user: User):
         '''
         Adds a User to database
 
@@ -76,4 +79,3 @@ class UserDB:
 
     def __str__(self):
         return f'UserDB({", ".join([user.login for user in self.users])})'
-

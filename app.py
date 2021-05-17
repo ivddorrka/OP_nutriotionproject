@@ -2,12 +2,12 @@
 Website v0
 """
 from flask import Flask, session, redirect, url_for, render_template, request
-import user_work
-import user_db
+from modules import user_work
+from modules import user_db
 from markupsafe import escape
-from calculator import Calculator
-from product import Product
-from menu import Menu
+from modules.calculator import Calculator
+from modules.product import Product
+from modules.menu import Menu
 
 app = Flask(__name__)
 
@@ -15,6 +15,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 def backup_user(login, password, height, weight, age, gender, activity, current_menu):
+    '''
+    Save users data, passed as arguments to users.csv file (improvised database)
+    '''
     with open('users.csv', 'a') as f_users:
         f_users.write(
             ','.join([login, password, height, weight, age, gender, activity, 'Nan']))
@@ -22,6 +25,9 @@ def backup_user(login, password, height, weight, age, gender, activity, current_
 
 
 def get_backuped_users():
+    '''
+    Adds users, represented as their data in users.csv to user_bd object as instances of user
+    '''
     with open('users.csv', 'r') as f_users:
         for line in f_users:
             if line.strip():
@@ -46,9 +52,12 @@ def home():
     Home page, renders basic front page
     """
     username = escape(session['username']) if 'username' in session else False
+    session.pop('username', None)
     if username:
+        session.pop('username', None)
         user_obj = users_db.get(username)
-        calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
+        calc = Calculator(user_obj.weight, user_obj.height,
+                          user_obj.age, user_obj.gender, user_obj.activity)
         return render_template("home.html", title='Home page', username=username, normas=[calc.calories_need(), calc.proteins_need(), calc.fats_need(), calc.carbohydrates_need()])
     return render_template("home.html", title='Home page', username=username, normas=[])
 
@@ -381,7 +390,8 @@ def add_cals():
     if 'username' in session:
         # lst =
         user_obj = users_db.get(escape(session['username']))
-        calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
+        calc = Calculator(user_obj.weight, user_obj.height,
+                          user_obj.age, user_obj.gender, user_obj.activity)
         food = request.form.get("menu")
         weight = request.form.get('keyword')
         pr = Product(food)

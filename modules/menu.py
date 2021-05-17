@@ -3,8 +3,8 @@ Module for implementing menu class.
 """
 import csv
 import random
-from dish import Dish
-from product import Product
+from modules.dish import Dish
+from modules.product import Product
 
 
 class Menu:
@@ -39,7 +39,7 @@ class Menu:
                      str(dish.calories) + '\nProteins: ' + str(dish.proteins) +
                      '\nFats: ' + str(dish.fats) +
                      '\nCarbohydrates: ' + str(dish.carbohydrates) + '\n\n'+'----------')
-        return menu 
+        return menu
 
     def choose_dishes(self):
         """
@@ -124,7 +124,7 @@ class Menu:
             self.generate_menu()
         # self.daily_calories = calories
         # self.daily_carbohydrates = carbohydrates
-        # self.daily_fats = fats 
+        # self.daily_fats = fats
         # self.daily_proteins = proteins
 
     def generate_dish(self):
@@ -190,4 +190,3 @@ class Menu:
 #     # name = ''.join(str(menu).split('----------')[2]).split('Products')[0].split('\n\n')[0]
 #     # menu.accept_dish(name)
 #     # print(menu.daily_calories)
-
