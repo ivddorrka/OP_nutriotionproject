@@ -57,4 +57,4 @@ All you need to do - is search for a particular product, write down its weight a
 * Yaroslav Moskalyk
 
 ## License
-
+[MIT](LICENSE)
