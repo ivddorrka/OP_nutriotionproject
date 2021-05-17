@@ -21,6 +21,33 @@ Read **[wiki page](https://github.com/ivddorrka/OP_nutriotionproject/wiki/Idea-o
 ## Installation
 
 ## Usage
+ 
+
+![Screenshot](loginpage.png)
+First of all login or registrate
+
+As soon as you do it - you'll be able to use other features we provide you with 
+* At the home page - there's always data concerning how much should you eat
+
+![Screenshot](homepage.png)
+
+There're several buttons at the topbar 
+* First of all you can modify your personal data - "Profile" 
+
+![Screenshot](profile.png)
+
+* Secondly you will be able to generate a menu for today - be careful if you want to save it - you shoud choose "None" and then click "change" button 
+
+![Screenshot](menupage.png)
+
+You may also add as much extra products as you wish to calculate how much nutrients will be added to the menu you've accepted 
+
+![Screenshot](choicepage.png)
+![Screenshot](weightpage.png)
+
+All you need to do - is search for a particular product, write down its weight and press the enter key. The nutrients will be automatically added to the final calculationg/ which can be fiund tougether with your final menu:
+
+![Screenshot](finalpage.png)
 
 ## Credits
 * Darya Kuzmina
