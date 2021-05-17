@@ -1,14 +1,14 @@
-<input name="age" placeholder="Age: " type="text" value='{{ user_data[0] if user_data[0] else ''}}'/>
-<input name="height" placeholder="Height" type='text' value='{{ user_data[1] if user_data[1] else ''}}'/>
-<input name="weight" placeholder="Weight" type='text' value='{{ user_data[2] if user_data[2] else ''}}'/><br>
-<select name="comp_select" class="selectpicker form-control">
-    <option value="1.2 Sedentary: Little or no physical activity" {{ selected if user_data[3] == 1.2 }}>1.2 Sedentary: Little or no physical activity</option>
-    <option value="1.3 Lightly Active: Light exercise or activity 1-3 days per week" {{ 'selected' if user_data[3] == 1.3 }}>1.3 Lightly Active: Light exercise or activity 1-3 days per week</option>
-    <option value="1.5 Moderately Active: Moderate exercise or activity 3-5 days per week" {{ 'selected' if user_data[3] == 1.5 }}>1.5 Moderately Active: Moderate exercise or activity 3-5 days per week</option>
-    <option value="1.7 Very Active: Hard exercise or activity 6-7 days per week" {{ 'selected' if user_data[3] == 1.7 }}>1.7 Very Active: Hard exercise or activity 6-7 days per week</option>
-    <option value="1.9 Extremely Active: Hard daily exercise or activity and physical work" {{ 'selected' if user_data[3] == 1.9}}>1.9 Extremely Active: Hard daily exercise or activity and physical work</option>
-</select>
-<select name="gender" class="selectpicker form-control">
-    <option value="female" {{ 'selected' if user_data[4] == 'female'}}>Female</option>
-    <option value="male" {{ 'selected' if user_data[4] == 'male'}}>Male</option>
-</select>
+<center><h1>Age:</h1></center> <input name="age" placeholder="Age: " type="text" value='{{ user_data[0] if user_data[0] else ''}}'/>
+ <center><h1>Height:</h1></center>    <input name="height" placeholder="Height" type='text' value='{{ user_data[1] if user_data[1] else ''}}'/>
+ <center><h1>Weight:</h1></center>  <input name="weight" placeholder="Weight" type='text' value='{{ user_data[2] if user_data[2] else ''}}'/><br>
+ <center><h1>Activity:</h1></center>  <select name="comp_select" class="selectpicker form-control">
+        <option value="1.2 Sedentary: Little or no physical activity" {{ selected if user_data[3] == 1.2 }}>1.2 Sedentary: Little or no physical activity</option>
+        <option value="1.3 Lightly Active: Light exercise or activity 1-3 days per week" {{ 'selected' if user_data[3] == 1.3 }}>1.3 Lightly Active: Light exercise or activity 1-3 days per week</option>
+        <option value="1.5 Moderately Active: Moderate exercise or activity 3-5 days per week" {{ 'selected' if user_data[3] == 1.5 }}>1.5 Moderately Active: Moderate exercise or activity 3-5 days per week</option>
+        <option value="1.7 Very Active: Hard exercise or activity 6-7 days per week" {{ 'selected' if user_data[3] == 1.7 }}>1.7 Very Active: Hard exercise or activity 6-7 days per week</option>
+        <option value="1.9 Extremely Active: Hard daily exercise or activity and physical work" {{ 'selected' if user_data[3] == 1.9}}>1.9 Extremely Active: Hard daily exercise or activity and physical work</option>
+    </select>
+ <center><h1>Gender:</h1></center>  <select name="gender" class="selectpicker form-control">
+        <option value="female" {{ 'selected' if user_data[4] == 'female'}}>Female</option>
+        <option value="male" {{ 'selected' if user_data[4] == 'male'}}>Male</option>
+    </select>

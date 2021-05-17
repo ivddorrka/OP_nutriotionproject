@@ -2,15 +2,17 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
 </head>
 
-<body style="margin=0; padding: 0">
+<body style="margin=0; padding: 0; color: white;">
     
     {% include 'header.html' %}
 
     <center><h1>Hello {{username}}</h1></center>
-    <main>
-        <form action="/profile" method="post">
-            {% include 'parameters_form.html' %}
-            <input class = clicker type="submit" value="Update"/>
-        </form>
+    <main class='box'>
+        <div style='overflow: hidden; padding: 0px 10px'>
+            <form action="/profile" method="post" class='here'>
+                {% include 'parameters_form.html' %}
+                <input class = clicker type="submit" value="Update"/>
+            </form>
+        </div>
     </main>
 </body>

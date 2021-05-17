@@ -23,14 +23,48 @@ nav {
     margin: 0px auto;
 }
 
-header{
-    background: #721731;
+.box{
+    background: #f1f1f1;
+    width: 21%;
+    margin: 77px auto;
+    padding: 110px 19px;
 }
 
+input{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.here h1{
+    color: #0171bb;    
+}
 li {
   float: left;
+  border: 3px solid #0171bb;
+  background: #0171bb;
+  padding: 5px 15px;
 }
 
+
+.pager{
+    white-space: pre-line;
+    color: black;
+    background: white;
+    padding: 15px;
+    margin: 0px 4.08%;
+    width:25%;
+    display: inline-block;
+    height: 200px;
+    overflow: auto;
+}
+.pager h2{
+    width: 100%;
+    text-align: center;
+}
+
+.wrapper_final{
+    color: white;
+}
 li a {
   display: block;
   color: white;
@@ -47,20 +81,19 @@ form{
     margin: 0;
 }
 input[type = submit] {
-    background: none;
-    border: 3px solid black;
+    background: #0171bb;
     color: white;
     font-weight: bold;
     font-size: 15px;
     cursor: pointer;
     padding: 7px 40px;
-    border-radius: 7px;
+    border-radius: 100px;
     transition: 0.5s;
-    color: black;
+    color: white;
 }
 input[type=submit]:hover {
-    background: black;
-    color: white;
+    background: white;
+    color: black;
 }
 
 main{

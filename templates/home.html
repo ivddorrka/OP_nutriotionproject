@@ -10,15 +10,17 @@
     {% endif %}
 
     {% if not username %} 
-    <form action="/" method="post">
-        <input name="login" placeholder="Login: " type="text"/>
-        <input name="password" placeholder="Password: " type='text'/>
-        <input type="submit" value="Login"/>
-    </form>
-    <span style="margin-left: 35px; color: white;">New here?
-        <a style="display: inline; padding: 9px 3px;" href="/register">
-            <input type="submit" value="Register!"/>
-        </a>
-    </span>
+    <div class='box'>
+        <form action="/" method="post">
+            <input name="login" placeholder="Login: " type="text"/><br>
+            <input name="password" placeholder="Password: " type='text'/><br>
+            <input type="submit" value="Login"/><br>
+        </form>
+        <div style="margin-top: 100px; color: top; text-align: center; width: 100%">New here?
+            <a style="display: inline; padding: 9px 3px;" href="/register">
+                <input type="submit" value="Register!"/>
+            </a>
+        </div>
+    </div>
     {% endif %}
 </body>

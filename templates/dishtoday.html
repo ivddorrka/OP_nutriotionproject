@@ -7,17 +7,27 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
         <title>Dish Today</title>
     </head>
-    <body>
+    <body style='width:95%; margin: 0px auto;' class='wrapper_final'>
         {% include 'header.html' %}
         {% if menu1 %} 
-        <h1> You have menu !!!</h1>
-        <h2> Menu 1: {{menu1}} </h2>
-        <h2> Menu 2: {{menu2}} </h2>
-        <h2> Menu 3: {{menu3}} </h2>
+        <div class='pager'>
+            <h2> Dish 1</h2>
+            {{menu1}} 
+        </div>
+        <div class='pager'>
+            <h2> Dish 2</h2>
+            {{menu2}} 
+        </div>
+        <div class = 'pager'>
+            <h2> Dish 3</h2>
+            {{menu3}} 
+        </div>
+        <!--<h2> Menu 2: {{menu2}} </h2>-->
+        <!--<h2> Menu 3: {{menu3}} </h2>-->
         <h1>You'll eat this much</h1>
-        <h2> Calories 1: {{cal}} </h2>
-        <h2> Proteins 2: {{prot}} </h2>
-        <h2> Fats 3: {{fats}} </h2>
+        <h2> Calories: {{cal}} </h2>
+        <h2> Proteins: {{prot}} </h2>
+        <h2> Fats: {{fats}} </h2>
         <h2> Carbohydrates: {{carbs}} </h2>
         {% else %}
         <h1>You have no menu yet <a href="/menu">Go to menu page</a></h1>

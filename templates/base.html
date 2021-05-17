@@ -6,33 +6,34 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
         <title>Menu</title>
     </head>
-    <body>
+    <body style="color: white">
         {% include 'header.html' %}
         {% if menu1 %} 
-        <h1> You have menu !!!</h1>
-        <h2> Menu 1: {{menu1}} </h2>
-        <h2> Menu 2: {{menu2}} </h2>
-        <h2> Menu 3: {{menu3}} </h2>
-        <h2> Menu 4: {{menu4}} </h2>
+        <div class='pager'>
+            <h2> Dish 1</h2>
+            {{menu1}} 
+        </div>
+        <div class='pager'>
+            <h2> Dish 2</h2>
+            {{menu2}} 
+        </div>
+        <div class = 'pager'>
+            <h2> Dish 3</h2>
+            {{menu3}} 
+        </div>
         {% else %}
         <h1>You have no menu yet. Generate it below!</h1>
         {% endif %}
         <form action="/menu" method="post">
-
-        <select name="dish_change", class="selectpicker form-control">
             <h3>Choose which menu to change</h3>
-            <option value="first">first</option>
-            <option value="second">second</option>
-            <option value="third">third</option>
-            <option value="None">None</option>
-            <option value="all">all</option>
-
-        <!-- </select>
-        <select name="choice", class="selectpicker form-control">
-            <option value="Regenerate">Regenerate</option>
-            <option value="Finish">Finish</option> -->
-        </select>
-            <input type="submit" value="Apply"/>
+            <select name="dish_change", class="selectpicker form-control">
+                <option value="first">First</option>
+                <option value="second">Second</option>
+                <option value="third">Third</option>
+                <option value="None">None</option>
+                <option value="all">All</option>
+            </select>
+            <input style='width: 300px' type="submit" value="Change"/>
         </form>
     </body>
 </html>

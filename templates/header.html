@@ -1,8 +1,8 @@
-<header style = 'background: #721731'>
+<header>
     <center>
-        <nav style='width: 70%; margin: 0px auto;'>
+        <nav style='width: 70%; margin: 0px auto'>
             <ul>
-                <li><a class="active" href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <!-- <li><a href="/menuopt">Add My Dish to Menu</a></li> -->
 
                 {% if username %} 
@@ -15,13 +15,16 @@
             </ul>
         </nav>
     </center>
-    <div style='margin: 0; display:flex; justify-content: space-around; align-items: center; padding: 50px; background: #333333; color: white;'>
-        <center><h1>{{title}}</h1></center>
-    </div>
-    <div>
-        {% for user in users %}            
-            <p> {{user.login}} </p>
-        {% endfor %}
-    </div>
-</header>
+    {% if username %} 
+        <div style='margin: 0; display:flex; justify-content: space-around; align-items: center; margin-top: 250px; padding: 50px; color: white;'>
+            <center><h1 style="font-size: 80px">{{title}}</h1></center>
+        </div>
+    {% else %}
+        <div>
+            {% for user in users %} 
+                <p> {{user.login}} </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </header>
 

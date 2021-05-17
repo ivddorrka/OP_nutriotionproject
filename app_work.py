@@ -209,7 +209,8 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [m1, m2, m3]
+                # user_obj.current_menu = [m1, m2, m3]
+                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
                 return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'second':
                 menu_use.delete_dish(menu_use.menu[1])
@@ -218,7 +219,7 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [m1, m2, m3]
+                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
                 return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'third':
                 # menu1 = menu.generate_menu()
@@ -227,7 +228,8 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [m1, m2, m3]
+                # user_obj.current_menu = [m1, m2, m3]
+                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
                 return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             else:
@@ -235,7 +237,8 @@ def generate_menu_page():
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
-                user_obj.current_menu = [m1, m2, m3]
+                user_obj.current_menu = [menu_use.menu[0], menu_use.menu[1], menu_use.menu[2]]
+                # user_obj.current_menu = [m1, m2, m3]
                 return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
             # where_next = request.form.get('choice')
@@ -351,7 +354,7 @@ def add_cals():
             # print(lst_here)
             # print(a)
             # for i in range(len(a)):
-            return render_template('added_products.html', username = escape(session['username']), vars=nutr)
+            return render_template('home.html', username = escape(session['username']), vars=nutr)
         except TypeError:
             return "Wrong weight"
     else:
@@ -374,10 +377,16 @@ def calc_last():
         carbs=0
         for i in a:
             cals += i[0]
-            fats += i[1]
-            prots += i[2]
+            prots += i[1]
+            fats += i[2]
             carbs += i[3]
         if menu_res:
+            for dish in user_obj.current_menu:
+                cals += dish.calories
+                fats += dish.fats
+                prots += dish.proteins
+                carbs += dish.carbohydrates
+
             m1 = menu_res[0]
             m2 = menu_res[1]
             m3 = menu_res[2]
