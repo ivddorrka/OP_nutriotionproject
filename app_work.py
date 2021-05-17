@@ -132,18 +132,11 @@ def infor_user():
     """
     To get data from user
     """
-    login = request.form.get("login")
-    password = request.form.get("password")
-    age = request.form.get("age")
-    height = request.form.get("height")
-    weight = request.form.get("weight")
-    gender = request.form.get("gender")
-    act = request.form.get("comp_select")
-    user = user_work.User(login)
     if user.set_characteristics(age, height, weight, gender, act):
         try:
-            user_db.add(user)
-        except:
+            users_db.add(user)
+        except Exception as err:
+            print(err)
             return render_template("failure.html", message="User already exists", username=False)
         backup_user(login, password, height, weight, age, gender, act, [])
     return user, password, age, height, weight, gender, act
@@ -154,19 +147,21 @@ def file_html():
     """
     To return already submitted page
     """
-    info = infor_user()
-    password = info[1]
-    user = info[0]
-    age = info[2]
-    height = info[3]
-    weight = info[4]
-    gender = info[5]
-    act = info[6]
+    login = request.form.get("login")
+    password = request.form.get("password")
+    age = request.form.get("age")
+    height = request.form.get("height")
+    weight = request.form.get("weight")
+    gender = request.form.get("gender")
+    act = request.form.get("comp_select")
+    user = user_work.User(login)
+
     try:
         user.set_characteristics(age, height, weight, gender, act)
         try:
             user.set_password(password)
             users_db.add(user)
+            backup_user(login, password, height, weight, age, gender, act, [])
             return redirect(url_for('home', title='Home page', username=False))
         except user_work.PasswordTooShortError:
             return render_template("failure.html")
@@ -365,6 +360,7 @@ def add_cals():
     if 'username' in session:
         # lst =
         user_obj = users_db.get(escape(session['username']))
+        calc = Calculator(user_obj.weight, user_obj.height, user_obj.age, user_obj.gender, user_obj.activity)
         food = request.form.get("menu")
         weight = request.form.get('keyword')
         pr = Product(food)
@@ -378,7 +374,7 @@ def add_cals():
             # print(lst_here)
             # print(a)
             # for i in range(len(a)):
-            return render_template('home.html', username=escape(session['username']), vars=nutr)
+            return render_template('home.html', username=escape(session['username']), normas=[calc.calories_need(), calc.proteins_need(), calc.fats_need(), calc.carbohydrates_need()], vars=nutr)
         except TypeError:
             return "Wrong weight"
     else:
