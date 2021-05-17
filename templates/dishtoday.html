@@ -14,16 +14,13 @@
         <h2> Menu 1: {{menu1}} </h2>
         <h2> Menu 2: {{menu2}} </h2>
         <h2> Menu 3: {{menu3}} </h2>
-        {% else %}
-        <h1>You have no menu yet</h1>
-        {% endif %}
-        <h>You'll eat this much</h>
+        <h1>You'll eat this much</h1>
         <h2> Calories 1: {{cal}} </h2>
         <h2> Proteins 2: {{prot}} </h2>
         <h2> Fats 3: {{fats}} </h2>
         <h2> Carbohydrates: {{carbs}} </h2>
-        <form action="/profile" method="post">
-            <input type="submit" value="Back"/>
-        </form>
+        {% else %}
+        <h1>You have no menu yet <a href="/menu">Go to menu page</a></h1>
+        {% endif %}
     </body>
 </html>

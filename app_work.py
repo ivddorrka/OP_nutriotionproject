@@ -44,8 +44,7 @@ def home():
     Home page
     """
     username = escape(session['username']) if 'username' in session else False
-    users = users_db.users
-    return render_template("home.html", title='Home page', username=username, users=users)
+    return render_template("home.html", title='Home page', username=username)
 
 
 @app.route("/", methods=["POST"])
@@ -59,11 +58,11 @@ def login():
 
         if users_db.get(login).password == password:
             session['username'] = request.form['login']
-            return redirect(url_for('home', title='Home page', message='Login successful'))
+            return redirect(url_for('home'))
         else:
-            return redirect(url_for('home', title='Home page', message='Wrong password'))
+            return render_template("failure.html", message="Wrong password")
     except user_db.UserNotFound:
-        return redirect(url_for('home', title='Eror', message='No such user'))
+        return render_template("failure.html", message="No such user")
 
 
 @app.route('/register', methods=['GET'])
@@ -71,7 +70,7 @@ def register_page():
     if 'username' not in session:
         return render_template('registration.html')
     else:
-        return "Your are already logged in"
+        return render_template("failure.html", message="Your are already logged in", username=escape(session['username']))
 
 
 @app.route('/profile')
@@ -83,8 +82,7 @@ def profile():
         weight = user_obj.weight
         act = user_obj.activity
         gender = user_obj.gender
-        print(act)
-        return render_template("profile.html", title='Profile', username = escape(session['username']), logged_in_status=True, user_data=[age, height, weight, act, gender])
+        return render_template("profile.html", title='Profile', username = escape(session['username']), user_data=[age, height, weight, act, gender])
     return "You are not logged in"
 
 
@@ -94,7 +92,7 @@ def logout():
     session.pop('username', None)
     a.clear()
     menu_final.clear()
-    return redirect(url_for('home', title='Home page', message='Logout successful'))
+    return redirect(url_for('home'))
 
 
 @app.route('/profile', methods=['POST'])
@@ -119,8 +117,7 @@ def profile_update():
                 if user.split(',')[0].strip() != login:
                     f.write(user)
         backup_user(user_obj.login, user_obj.password, height, weight, age, gender, act, user_obj.current_menu)
-        print(act)
-        return render_template("profile.html", user_data=[age, height, weight, act, gender], username=login)
+        return render_template("profile.html", title='Profile', user_data=[age, height, weight, act, gender], username=login)
 
 
 @app.route("/registration", methods=["POST"])
@@ -159,7 +156,7 @@ def file_html():
         try:
             user.set_password(password)
             users_db.add(user)
-            return redirect(url_for('home', title='Home page', message='Registered', username=False))
+            return redirect(url_for('home', title='Home page', username=False))
         except user_work.PasswordTooShortError:
             return render_template("failure.html")
     except ValueError:
@@ -265,7 +262,7 @@ def generate_menu_page():
             return redirect(url_for('home', title='Home page', username = escape(session['username']), message='Added daily menu successfuly'))
             # return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
-        return redirect(url_for('home', title='Home page', message='Not logged in', username=False))
+        return render_template("failure.html", message="Not logged in", username=False)
 
 # a = []
 @app.route('/menu', methods=['get'])
@@ -284,12 +281,12 @@ def get_menu_page():
             m1 = menu_res[0]
             m2 = menu_res[1]
             m3 = menu_res[2]
-            # m1 = ''.join(str(menu_res).split('----------')[0])
-            # m2 = ''.join(str(menu_res).split('----------')[1])
-            # m3 = ''.join(str(menu_res).split('----------')[2])
-            return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
         else:
-            return render_template("base.html", username = escape(session['username']), title='Menu', menu1='None yet', menu2='None yet', menu3='None yet',  menu4='Your menu')
+            m1 = []
+            m2 = []
+            m3 = []
+            
+        return render_template("base.html", username = escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
         return "You are not logged in"
 
@@ -387,6 +384,10 @@ def calc_last():
             # m1 = ''.join(str(menu_final[0]).split('----------')[0])
             # m2 = ''.join(str(menu_final[0]).split('----------')[1])
             # m3 = ''.join(str(menu_final[0]).split('----------')[2])
+        else:
+            m1 = []
+            m2 = []
+            m3 = []
         return render_template('dishtoday.html', username = escape(session['username']), menu1=m1, menu2=m2, menu3=m3, cal=cals, prot=prots, fats=fats, carbs=carbs)
     else:
         return "Your are not logged in"

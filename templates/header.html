@@ -3,29 +3,14 @@
         <nav style='width: 70%; margin: 0px auto;'>
             <ul>
                 <li><a class="active" href="/">Home</a></li>
-                <li><a href="/menu">Daily Menu</a></li>
-                <li><a href="/final">FInal Menu For Today</a></li>
                 <!-- <li><a href="/menuopt">Add My Dish to Menu</a></li> -->
 
                 {% if username %} 
+                    <li><a href="/menu">Daily Menu</a></li>
+                    <li><a href="/final">FInal Menu For Today</a></li>
                     <li style="float:right"><a href="/logout">Logout</a></li>
                     <li style="float:right"><a href="/profile">Profile ({{username}})</a></li>
                     <li><a href="/menuopt">Add My Dish to Menu</a></li>
-                {% else %}
-                    <li style="float:right">
-                        <form action="/" method="post">
-                            <input name="login" placeholder="Login: " type="text"/>
-                            <input name="password" placeholder="Password: " type='text'/>
-                            <input type="submit" value="Login"/>
-                        </form>
-                        <span style="margin-left: 35px; color: white;">New here?
-                            <a style="display: inline; padding: 9px 3px;" href="/register">
-                                <input type="submit" value="Register!"/>
-                            </a>
-                        </span>
-                        <span>
-                        </span>
-                    </li>
                 {% endif %}
             </ul>
         </nav>
