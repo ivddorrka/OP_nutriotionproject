@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to nutriotion-assistant’s documentation! &#8212; nutriotion-assistant 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-nutriotion-assistant-s-documentation">
+<h1>Welcome to nutriotion-assistant’s documentation!<a class="headerlink" href="#welcome-to-nutriotion-assistant-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-app">
+<span id="nutriotionproject-main"></span><h1>NutriotionProject main<a class="headerlink" href="#module-app" title="Permalink to this headline">¶</a></h1>
+<p>Module with main app.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="app.CurrentMenu">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">CurrentMenu</span></span><a class="headerlink" href="#app.CurrentMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for current menu.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.CurrentMenu.set_men">
+<span class="sig-name descname"><span class="pre">set_men</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.CurrentMenu.set_men" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set current menu to given one.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.add_cals">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">add_cals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.add_cals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add nutrients from products.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.add_cals1">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">add_cals1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.add_cals1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add nutrients to daily intake for products.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.all_of_them">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">all_of_them</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.all_of_them" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return page with all products with given name from API.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.backup_user">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">backup_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">login</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_menu</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.backup_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write info about user in file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.calc_last">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">calc_last</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.calc_last" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add nutrients for all menu.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.file_html">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">file_html</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.file_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>To return already submitted page</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.generate_menu_page">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">generate_menu_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.generate_menu_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>This route is used to calculated parameters and then create menu,
+which is then attached to user instance (new attribute).
+Clicking “Generate” button on base.html page redirects to this route.
+If no username in session, redirects to home page</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.get_backuped_users">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">get_backuped_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.get_backuped_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get users from database.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.get_menu_page">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">get_menu_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.get_menu_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>This route renders base.html page with menu if it is generated or with single button to
+generate menu otherwise (watch base.html on the bottom)
+This route can not be accessed without being logged in, so sample page will be rendered
+if there is no username in session</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.home">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Home page.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.login">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is post request to home page.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.logout">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logout user from session.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.menuuuu">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">menuuuu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.menuuuu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return page for optional menu.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.profile">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return profile page.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.profile_update">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">profile_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.profile_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>This route changes user profile</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.register_page">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">register_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.register_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return register page.</p>
+</dd></dl>
+
+</section>
+<section id="module-modules.calculator">
+<span id="nutriotionproject-calculator"></span><h1>NutriotionProject calculator<a class="headerlink" href="#module-modules.calculator" title="Permalink to this headline">¶</a></h1>
+<p>Module for calculator.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.calculator.Calculator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">modules.calculator.</span></span><span class="sig-name descname"><span class="pre">Calculator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sex</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activity</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.calculator.Calculator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for calculator.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.calculator.Calculator.calories_need">
+<span class="sig-name descname"><span class="pre">calories_need</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#modules.calculator.Calculator.calories_need" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the daily amount of calories to this user (in kcal).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.calculator.Calculator.carbohydrates_need">
+<span class="sig-name descname"><span class="pre">carbohydrates_need</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.calculator.Calculator.carbohydrates_need" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the daily amount of carbohydrates to this user (in grams).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.calculator.Calculator.fats_need">
+<span class="sig-name descname"><span class="pre">fats_need</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.calculator.Calculator.fats_need" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the daily amount of fats to this user (in grams).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.calculator.Calculator.proteins_need">
+<span class="sig-name descname"><span class="pre">proteins_need</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.calculator.Calculator.proteins_need" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the daily amount of proteins to this user (in grams).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.dish">
+<span id="nutriotionproject-dish"></span><h1>NutriotionProject dish<a class="headerlink" href="#module-modules.dish" title="Permalink to this headline">¶</a></h1>
+<p>Module for implementing class dish.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.dish.Dish">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">modules.dish.</span></span><span class="sig-name descname"><span class="pre">Dish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instruction</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">products</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proteins</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fats</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">carbohydrates</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.dish.Dish" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for dishes.</p>
+</dd></dl>
+
+</section>
+<section id="module-modules.menu">
+<span id="nutriotionproject-menu"></span><h1>NutriotionProject menu<a class="headerlink" href="#module-modules.menu" title="Permalink to this headline">¶</a></h1>
+<p>Module for implementing menu class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.menu.Menu">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">modules.menu.</span></span><span class="sig-name descname"><span class="pre">Menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proteins</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fats</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">carbohydrates</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preferences</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.menu.Menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for menu.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.menu.Menu.accept_dish">
+<span class="sig-name descname"><span class="pre">accept_dish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dish</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#modules.dish.Dish" title="modules.dish.Dish"><span class="pre">modules.dish.Dish</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.menu.Menu.accept_dish" title="Permalink to this definition">¶</a></dt>
+<dd><p>User aceepts dish, we substitute his/her daily intake of nutrients by this 
+dish.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.menu.Menu.choose_dishes">
+<span class="sig-name descname"><span class="pre">choose_dishes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.menu.Menu.choose_dishes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for the dishes which user will eat. Return list of these dishes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.menu.Menu.delete_dish">
+<span class="sig-name descname"><span class="pre">delete_dish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dish</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#modules.dish.Dish" title="modules.dish.Dish"><span class="pre">modules.dish.Dish</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.menu.Menu.delete_dish" title="Permalink to this definition">¶</a></dt>
+<dd><p>User refuses to eat this dish, we change it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.menu.Menu.generate_dish">
+<span class="sig-name descname"><span class="pre">generate_dish</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.menu.Menu.generate_dish" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new dish to the menu if user wanted to change the current one.
+!Prerequirements: this method generates the third meal, two others stay.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.menu.Menu.generate_menu">
+<span class="sig-name descname"><span class="pre">generate_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.menu.Menu.generate_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates menu which consists of 3 different dishes to the user.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.menu.Menu.search_product">
+<span class="sig-name descname"><span class="pre">search_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.menu.Menu.search_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for the product in database.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.product">
+<span id="nutriotionproject-product"></span><h1>NutriotionProject product<a class="headerlink" href="#module-modules.product" title="Permalink to this headline">¶</a></h1>
+<p>Module for implementing product class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.product.Product">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">modules.product.</span></span><span class="sig-name descname"><span class="pre">Product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.product.Product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for product.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.product.Product.choose_product">
+<span class="sig-name descname"><span class="pre">choose_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exact_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.product.Product.choose_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the info about nutrients (as a tuple in order calories-lipids-fats
+-carbohydrates) in this exact product.
+Weight should be in grams!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.product.Product.get_products">
+<span class="sig-name descname"><span class="pre">get_products</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.product.Product.get_products" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of the names of the products which API found by users ask.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.user_db">
+<span id="nutriotionproject-user-db"></span><h1>NutriotionProject user_db<a class="headerlink" href="#module-modules.user_db" title="Permalink to this headline">¶</a></h1>
+<p>UserDB class</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="modules.user_db.UserAlreadyExists">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">modules.user_db.</span></span><span class="sig-name descname"><span class="pre">UserAlreadyExists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usr_login</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_db.UserAlreadyExists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises when trying to add existing user or user with the same login</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.user_db.UserDB">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">modules.user_db.</span></span><span class="sig-name descname"><span class="pre">UserDB</span></span><a class="headerlink" href="#modules.user_db.UserDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>User DataBase class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_db.UserDB.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#modules.user_work.User" title="modules.user_work.User"><span class="pre">modules.user_work.User</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_db.UserDB.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a User to database</p>
+<p>If user with the same login is already in UserDB, UserAlreadyExists exceptoin will be raised</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_db.UserDB.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_db.UserDB.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all users from database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_db.UserDB.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usr_login</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#modules.user_work.User" title="modules.user_work.User"><span class="pre">modules.user_work.User</span></a><a class="headerlink" href="#modules.user_db.UserDB.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns User object for usr_login if user with usr_login is in UserDB.
+Otherwise raises UserNotFound exception</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_db.UserDB.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usr_login</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_db.UserDB.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a user from database.
+usr_login - user login as str OR object of type User</p>
+<p>If usr_login is represented as object of type User, usr.login will be extracted and
+used to find and delete the user from self.users</p>
+<p>In case user with user_id is not found, UserNotFound exception will be raised</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modules.user_db.UserNotFound">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">modules.user_db.</span></span><span class="sig-name descname"><span class="pre">UserNotFound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usr_login</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_db.UserNotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises when trying to access user which is not in UserDB</p>
+</dd></dl>
+
+</section>
+<section id="module-modules.user_work">
+<span id="nutriotionproject-user-work"></span><h1>NutriotionProject user_work<a class="headerlink" href="#module-modules.user_work" title="Permalink to this headline">¶</a></h1>
+<p>User class 1</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="modules.user_work.PasswordTooShortError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">modules.user_work.</span></span><span class="sig-name descname"><span class="pre">PasswordTooShortError</span></span><a class="headerlink" href="#modules.user_work.PasswordTooShortError" title="Permalink to this definition">¶</a></dt>
+<dd><p>To raise when password’s too short</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.user_work.User">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">modules.user_work.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">login</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_work.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get info from user</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_work.User.get_activ">
+<span class="sig-name descname"><span class="pre">get_activ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">act</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_work.User.get_activ" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get a number of activity</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_work.User.get_age">
+<span class="sig-name descname"><span class="pre">get_age</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">age</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_work.User.get_age" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get age</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_work.User.get_height">
+<span class="sig-name descname"><span class="pre">get_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_work.User.get_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get height</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_work.User.get_weight">
+<span class="sig-name descname"><span class="pre">get_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_work.User.get_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get weight</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_work.User.set_characteristics">
+<span class="sig-name descname"><span class="pre">set_characteristics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_work.User.set_characteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>To set all characteristics</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.user_work.User.set_gender">
+<span class="sig-name descname"><span class="pre">set_gender</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.user_work.User.set_gender" title="Permalink to this definition">¶</a></dt>
+<dd><p>To set a choosen gender</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">nutriotion-assistant</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alina Muliak, Glib Solodzhuk, Daria Kuzmina, Yaroslav Moskalyk.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

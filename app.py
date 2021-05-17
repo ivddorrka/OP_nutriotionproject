@@ -1,5 +1,5 @@
 """
-Website v0
+Module with main app.
 """
 from flask import Flask, session, redirect, url_for, render_template, request
 from modules import user_work
@@ -15,6 +15,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 def backup_user(login, password, height, weight, age, gender, activity, current_menu):
+    """
+    Write info about user in file.
+    """
     with open('users.csv', 'a') as f_users:
         f_users.write(
             ','.join([login, password, height, weight, age, gender, activity, 'Nan']))
@@ -22,6 +25,9 @@ def backup_user(login, password, height, weight, age, gender, activity, current_
 
 
 def get_backuped_users():
+    """
+    Get users from database.
+    """
     with open('users.csv', 'r') as f_users:
         for line in f_users:
             if line.strip():
@@ -43,7 +49,7 @@ get_backuped_users()
 @app.route("/")
 def home():
     """
-    Home page
+    Home page.
     """
     username = escape(session['username']) if 'username' in session else False
     if username:
@@ -62,7 +68,7 @@ def home():
 @app.route("/", methods=["POST"])
 def login():
     """
-    This is post request to home page
+    This is post request to home page.
     """
     try:
         login = request.form['login']
@@ -79,6 +85,9 @@ def login():
 
 @app.route('/register', methods=['GET'])
 def register_page():
+    """
+    Return register page.
+    """
     if 'username' not in session:
         return render_template('registration.html', user_data=[])
     else:
@@ -87,6 +96,9 @@ def register_page():
 
 @app.route('/profile')
 def profile():
+    """
+    Return profile page.
+    """
     if 'username' in session:
         user_obj = users_db.get(escape(session['username']))
         age = user_obj.age
@@ -100,7 +112,9 @@ def profile():
 
 @app.route('/logout')
 def logout():
-    # remove the username from the session if it's there
+    """
+    Logout user from session.
+    """
     session.pop('username', None)
     a.clear()
     menu_final.clear()
@@ -162,14 +176,22 @@ def file_html():
     except ValueError:
         return render_template("failure.html")
 
-# MENU
-
 
 class CurrentMenu:
+    """
+    Class for current menu.
+    """
+
     def __init__(self):
+        """
+        Initialize a class for current menu.
+        """
         self.cur_menu = None
 
     def set_men(self, menu):
+        """
+        Set current menu to given one.
+        """
         self.cur_menu = menu
 
 
@@ -186,7 +208,6 @@ def generate_menu_page():
     Clicking "Generate" button on base.html page redirects to this route.
     If no username in session, redirects to home page
     '''
-    # menu_final.clear()
     if 'username' in session:
         menu_final.clear()
         user_obj = users_db.get(escape(session['username']))
@@ -210,7 +231,6 @@ def generate_menu_page():
             if dish == 'first':
                 menu_use.delete_dish(menu_use.menu[0])
                 menu_use.generate_dish()
-                # menu1 = menu.generate_menu()
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
@@ -218,13 +238,11 @@ def generate_menu_page():
             if dish == 'second':
                 menu_use.delete_dish(menu_use.menu[1])
                 menu_use.generate_dish()
-                # menu1 = menu.generate_menu()
                 m1 = ''.join(str(menu_use).split('----------')[0])
                 m2 = ''.join(str(menu_use).split('----------')[1])
                 m3 = ''.join(str(menu_use).split('----------')[2])
                 return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
             if dish == 'third':
-                # menu1 = menu.generate_menu()
                 menu_use.delete_dish(menu_use.menu[2])
                 menu_use.generate_dish()
                 m1 = ''.join(str(menu_use).split('----------')[0])
@@ -239,12 +257,7 @@ def generate_menu_page():
                 m3 = ''.join(str(menu_use).split('----------')[2])
                 return render_template("base.html", username=escape(session['username']), title='Menu', menu1=m1, menu2=m2, menu3=m3)
 
-            # where_next = request.form.get('choice')
         else:
-            # if where_next != "Regenerate":
-            # print(len(str(menu_use.menu).split('----------')[-3:]))
-            # for i in str(menu_use.menu).split('----------')[-3:]:
-            # print(len(menu_use.menu))
             menu_use.accept_dish(menu_use.menu[0])
             menu_use.accept_dish(menu_use.menu[2])
             menu_use.accept_dish(menu_use.menu[1])
@@ -260,11 +273,8 @@ def generate_menu_page():
             menu_final.append(menu_use)
 
             return redirect(url_for('home', title='Home page', username=escape(session['username']), message='Added daily menu successfuly'))
-    # return render_template("base.html", title='Menu', menu1=m1, menu2=m2, menu3=m3)
     else:
         return redirect(url_for('home', title='Home page', message='Not logged in', username=False))
-
-# a = []
 
 
 @app.route('/menu', methods=['get'])
@@ -278,7 +288,6 @@ def get_menu_page():
     if 'username' in session:
         user_obj = users_db.get(escape(session['username']))
         menu_res = False if not user_obj.current_menu else user_obj.current_menu
-        # dish = request.form.get("dish_change")
         if menu_res:
             m1 = menu_res[0]
             m2 = menu_res[1]
@@ -293,15 +302,11 @@ def get_menu_page():
         return "You are not logged in"
 
 
-# @app.route('/menuopt', methods=['post'])
-# def find_smth():
-#     if 'username' in session:
-#         return render_template('menuoptional.html')
-#     else:
-#         return "You are not logged in"
-
 @app.route('/menuopt', methods=['GET'])
 def menuuuu():
+    """
+    Return page for optional menu.
+    """
     if 'username' in session:
         return render_template('menuoptional.html', username=escape(session['username']))
     else:
@@ -313,9 +318,11 @@ lyst = []
 
 @app.route('/menuopt/subm', methods=['post'])
 def add_cals1():
+    """
+    Add nutrients to daily intake for products.
+    """
     if 'username' in session:
         food = request.form.get("keyword")
-        # food = own_menu()
         pr = Product(food)
         lst = pr.get_products()
         for i in lst:
@@ -327,11 +334,12 @@ def add_cals1():
     else:
         return render_template("failure.html")
 
-# a = []
-
 
 @app.route('/menuopt/subm/choice', methods=['GET'])
 def all_of_them():
+    """
+    Return page with all products with given name from API.
+    """
     if 'username' in session:
         return render_template('productsearch.html', username=escape(session['username']), vars=lyst)
     else:
@@ -340,38 +348,34 @@ def all_of_them():
 
 @app.route('/menuopt/subm/choice', methods=['post'])
 def add_cals():
+    """
+    Add nutrients from products.
+    """
     if 'username' in session:
-        # lst =
         user_obj = users_db.get(escape(session['username']))
         calc = Calculator(user_obj.weight, user_obj.height,
                           user_obj.age, user_obj.gender, user_obj.activity)
         food = request.form.get("menu")
         weight = request.form.get('keyword')
         pr = Product(food)
-        # print(weight)
         try:
             weig = float(weight)
-            lst_here = []
-            # lst_here.append(food)
             nutr = pr.choose_product(food, weig)
             a.append(nutr)
-            # print(lst_here)
-            # print(a)
-            # for i in range(len(a)):
             return render_template('home.html', username=escape(session['username']), normas=[calc.calories_need(), calc.proteins_need(), calc.fats_need(), calc.carbohydrates_need()], vars=nutr)
         except TypeError:
             return "Wrong weight"
     else:
         return "You are not logged in"
-    # print(a)
 
 
 @app.route('/final', methods=['get'])
 def calc_last():
+    """
+    Add nutrients for all menu.
+    """
     if 'username' in session:
 
-        # print(len(menu_final[0]))
-        # print(menu_final[0])
         cals = 0
         fats = 0
         prots = 0
@@ -389,7 +393,6 @@ def calc_last():
         return "Your are not logged in"
 
 
-# print(a)
 if __name__ == "__main__":
     FLASK_DEBUG = 1
     TEMPLATES_AUTO_RELOAD = True
