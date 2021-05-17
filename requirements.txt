@@ -54,7 +54,6 @@ mccabe==0.6.1
 msgpack==1.0.2
 mypy-extensions==0.4.3
 neovim==0.3.1
-netsnmp-python==1.0a1
 numpy==1.20.1
 ordered-set==4.0.2
 packaging==20.9
