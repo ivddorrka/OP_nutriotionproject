@@ -144,7 +144,7 @@ def profile_update():
                     f.write(user)
         backup_user(user_obj.login, user_obj.password, height,
                     weight, age, gender, act, user_obj.current_menu)
-        return render_template("profile.html", title='Profile', user_data=[age, height, weight, act, gender], username=login)
+        return render_template("profile.html", title='Profile', user_data=[age, height, weight, float(act[:3]), gender], username=login)
 
 
 @app.route("/registration/submitted", methods=["POST"])
